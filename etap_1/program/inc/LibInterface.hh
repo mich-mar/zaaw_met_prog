@@ -2,35 +2,33 @@
 #define LIBINTERFACE_HH
 
 #include <string>
-#include "AbstractInterp4Command.hh"
-
-// Definicja typu wskaźnika na funkcję, która tworzy obiekt komendy.
-using CreateCmdFunc = AbstractInterp4Command* (*)();
+#include <memory>
+#include "AbstractInterp4Command.hh" 
 
 /*!
- * \brief Modeluje interfejs do biblioteki dynamicznej wtyczki.
+ * \brief Klasa opakowująca interfejs do dynamicznie ładowanej biblioteki wtyczki
+ *
+ * Zbiera wszystkie zmienne i odwołania odnoszące się do danej biblioteki/wtyczki.
  */
-class LibInterface {
-public:
-    /*!
-     * \brief Uchwyt do biblioteki dynamicznej.
-     */
-    void* pLibHnd = nullptr;
+struct LibInterface {
 
-    /*!
-     * \brief Nazwa polecenia, które jest udostępniane przez wtyczkę.
-     */
-    std::string CmdName;
+    // Typ funkcji tworzącej polecenie.
+    using CreateCmdFunc = AbstractInterp4Command* (*)(void);
 
-    /*!
-     * \brief Wskaźnik na funkcję tworzącą obiekt polecenia.
-     */
-    CreateCmdFunc pCreateCmd = nullptr;
+    // Uchwyt do załadowanej biblioteki.
+    void* LibHandler = nullptr;
 
-    /*!
-     * \brief Destruktor, który zwalnia bibliotekę.
-     */
-    ~LibInterface();
+    // Nazwa polecenia implementowanego przez tę bibliotekę.
+    std::string CmdName;                 
+
+    // Wskaźnik na funkcję tworzącą komendę.
+    CreateCmdFunc _pCreateCmd = nullptr; 
+
+    // Destruktor
+    ~LibInterface() = default;
+
+    // Fabryczna metoda tworząca instancję LibInterface.
+    LibInterface() = default;
 };
 
-#endif // LIBINTERFACE_HH
+#endif

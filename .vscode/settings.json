@@ -1,3 +1,6 @@
 {
-    "cmake.sourceDirectory": "/home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program"
+    "cmake.sourceDirectory": "/home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program",
+    "files.associations": {
+        "stdexcept": "cpp"
+    }
 }

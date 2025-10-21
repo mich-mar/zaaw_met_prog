@@ -1,0 +1,13 @@
+// Plik testowy dla preprocesora
+// Sprawdza usuwanie komentarzy
+
+#define MAKRO_TESTOWE 123 456
+#define PRZESUNIECIE 40 40
+
+/* To jest komentarz
+   blokowy.
+*/
+
+linia_z_makrem MAKRO_TESTOWE
+inna_linia PRZESUNIECIE
+linia_bez_makra

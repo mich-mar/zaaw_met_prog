@@ -1,5 +1,5 @@
-CMakeFiles/interp.dir/src/main.cpp.o: \
- /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/src/main.cpp \
+plugin/CMakeFiles/Interp4Rotate.dir/src/Interp4Rotate.cpp.o: \
+ /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/plugin/src/Interp4Rotate.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/11/iostream \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -145,10 +145,8 @@ CMakeFiles/interp.dir/src/main.cpp.o: \
  /usr/include/c++/11/bits/locale_facets.tcc \
  /usr/include/c++/11/bits/basic_ios.tcc \
  /usr/include/c++/11/bits/ostream.tcc /usr/include/c++/11/istream \
- /usr/include/c++/11/bits/istream.tcc /usr/include/dlfcn.h \
- /usr/include/x86_64-linux-gnu/bits/dlfcn.h \
- /usr/include/x86_64-linux-gnu/bits/dl_find_object.h \
- /usr/include/c++/11/cassert /usr/include/assert.h \
+ /usr/include/c++/11/bits/istream.tcc \
+ /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/plugin/inc/Interp4Rotate.hh \
  /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/inc/AbstractInterp4Command.hh \
  /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/inc/AbstractScene.hh \
  /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/inc/AbstractMobileObj.hh \
@@ -176,7 +174,8 @@ CMakeFiles/interp.dir/src/main.cpp.o: \
  /usr/include/c++/11/tr1/modified_bessel_func.tcc \
  /usr/include/c++/11/tr1/poly_hermite.tcc \
  /usr/include/c++/11/tr1/poly_laguerre.tcc \
- /usr/include/c++/11/tr1/riemann_zeta.tcc \
+ /usr/include/c++/11/tr1/riemann_zeta.tcc /usr/include/c++/11/cassert \
+ /usr/include/assert.h \
  /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/inc/AbstractComChannel.hh \
  /usr/include/c++/11/mutex /usr/include/c++/11/tuple \
  /usr/include/c++/11/utility /usr/include/c++/11/bits/stl_relops.h \
@@ -185,9 +184,4 @@ CMakeFiles/interp.dir/src/main.cpp.o: \
  /usr/include/c++/11/ratio /usr/include/c++/11/ctime \
  /usr/include/c++/11/bits/parse_numbers.h \
  /usr/include/c++/11/bits/std_mutex.h \
- /usr/include/c++/11/bits/unique_lock.h /usr/include/c++/11/sstream \
- /usr/include/c++/11/bits/sstream.tcc /usr/include/c++/11/fstream \
- /usr/include/c++/11/bits/codecvt.h \
- /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
- /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
- /usr/include/c++/11/bits/fstream.tcc
+ /usr/include/c++/11/bits/unique_lock.h
