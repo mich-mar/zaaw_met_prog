@@ -1,0 +1,9 @@
+/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles/interp.dir
+/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles/doc.dir
+/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles/show_help.dir
+/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles/clean_all.dir
+/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles/edit_cache.dir
+/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles/rebuild_cache.dir
+/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin/CMakeFiles/Interp4Move.dir
+/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin/CMakeFiles/edit_cache.dir
+/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin/CMakeFiles/rebuild_cache.dir
