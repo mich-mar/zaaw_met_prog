@@ -53,7 +53,7 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program
+CMAKE_SOURCE_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/program
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/build
@@ -68,10 +68,10 @@ include CMakeFiles/clean_all.dir/progress.make
 
 CMakeFiles/clean_all:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Performing a deep clean..."
-	rm -f "/home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/libs/*"
-	rm -rf /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/dox/doc
-	rm -f /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/dox/doxy.log
-	find /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program -name "*~" -delete
+	rm -f "/home/michal/Documents/studia/sem_7/zaaw_met_prog/program/libs/*"
+	rm -rf /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/dox/doc
+	rm -f /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/dox/doxy.log
+	find /home/michal/Documents/studia/sem_7/zaaw_met_prog/program -name "*~" -delete
 
 clean_all: CMakeFiles/clean_all
 clean_all: CMakeFiles/clean_all.dir/build.make
@@ -86,6 +86,6 @@ CMakeFiles/clean_all.dir/clean:
 .PHONY : CMakeFiles/clean_all.dir/clean
 
 CMakeFiles/clean_all.dir/depend:
-	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program /home/michal/Documents/studia/sem_7/zaaw_met_prog/build /home/michal/Documents/studia/sem_7/zaaw_met_prog/build /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles/clean_all.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/michal/Documents/studia/sem_7/zaaw_met_prog/program /home/michal/Documents/studia/sem_7/zaaw_met_prog/program /home/michal/Documents/studia/sem_7/zaaw_met_prog/build /home/michal/Documents/studia/sem_7/zaaw_met_prog/build /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles/clean_all.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/clean_all.dir/depend
 

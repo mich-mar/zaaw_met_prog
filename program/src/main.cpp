@@ -2,7 +2,7 @@
 #include <dlfcn.h>
 #include <cassert>
 #include "AbstractInterp4Command.hh"
-// #include "preprocesor.hpp" 
+#include "preprocesor.hh" 
 #include <string>
 #include <sstream>
 #include <cstdio>
@@ -71,42 +71,26 @@ int main()
   // 3. Testowanie Preprocesora
   // ====================================================================
   
-  // std::cout << "\n--- TESTOWANIE PREPROCESORA ---" << std::endl;
+  std::cout << "\n--- TESTOWANIE PREPROCESORA ---" << std::endl;
   
-  // const char* nazwaPlikuTestowego = "test_preproc.spr";
+  const char* nazwaPlikuTestowego = "test_preproc.spr";
   
-  // // 3.1. Sprawdź, czy plik testowy istnieje
-  // std::ifstream plikTestowy(nazwaPlikuTestowego);
-  // if (!plikTestowy) {
-  //     std::cerr << "!!! BŁĄD: Brak pliku testowego '" << nazwaPlikuTestowego << "'" << std::endl;
-  //     std::cerr << "!!! Utwórz go ręcznie przed uruchomieniem testu." << std::endl;
-  // } else {
-  //     plikTestowy.close(); // Plik istnieje, możemy go zamknąć i kontynuować
-  //     std::cout << "Znaleziono plik testowy: " << nazwaPlikuTestowego << std::endl;
+  // 3.1. Sprawdź, czy plik testowy istnieje
+  std::ifstream plikTestowy(nazwaPlikuTestowego);
+  if (!plikTestowy) {
+      std::cerr << "!!! BŁĄD: Brak pliku testowego '" << nazwaPlikuTestowego << "'" << std::endl;
+      std::cerr << "!!! Utwórz go ręcznie przed uruchomieniem testu." << std::endl;
+  } else {
+      plikTestowy.close(); // Plik istnieje, możemy go zamknąć i kontynuować
+      // 3.2. Uruchom preprocesor na tym pliku
+      try {
+          std::string wynik = uruchomPreprocesor(nazwaPlikuTestowego);
+          std::cout << wynik;
 
-  //     // 3.2. Uruchom preprocesor na tym pliku
-  //     try {
-  //         std::string wynik = uruchomPreprocesor(nazwaPlikuTestowego);
-  //         std::cout << "--- Wynik z preprocesora ---" << std::endl;
-  //         std::cout << wynik;
-  //         std::cout << "----------------------------" << std::endl;
-
-  //         // 3.3. Sprawdź poprawność (asercje)
-          
-  //         // Sprawdź, czy makra się rozwinęły
-  //         assert(wynik.find("linia_z_makrem 123 456") != std::string::npos);
-  //         assert(wynik.find("inna_linia 40 40") != std::string::npos);
-          
-  //         // Sprawdź, czy komentarze zniknęły
-  //         assert(wynik.find("Komentarz do usunięcia") == std::string::npos);
-  //         assert(wynik.find("komentarz blokowy") == std::string::npos);
-          
-  //         std::cout << "Testy preprocesora ZALICZONE." << std::endl;
-
-  //     } catch (const std::runtime_error& e) {
-  //         std::cerr << "!!! Błąd podczas testu preprocesora: " << e.what() << std::endl;
-  //     }
-  // }
+      } catch (const std::runtime_error& e) {
+          std::cerr << "!!! Błąd podczas testu preprocesora: " << e.what() << std::endl;
+      }
+  }
 
   // ====================================================================
   // 4. Zamykanie bibliotek

@@ -54,7 +54,7 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program
+CMAKE_SOURCE_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/program
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/build
@@ -84,6 +84,7 @@ clean: plugin/clean
 
 # Recursive "all" directory target.
 plugin/all: plugin/CMakeFiles/Interp4Move.dir/all
+plugin/all: plugin/CMakeFiles/Interp4Rotate.dir/all
 .PHONY : plugin/all
 
 # Recursive "preinstall" directory target.
@@ -92,6 +93,7 @@ plugin/preinstall:
 
 # Recursive "clean" directory target.
 plugin/clean: plugin/CMakeFiles/Interp4Move.dir/clean
+plugin/clean: plugin/CMakeFiles/Interp4Rotate.dir/clean
 .PHONY : plugin/clean
 
 #=============================================================================
@@ -101,12 +103,12 @@ plugin/clean: plugin/CMakeFiles/Interp4Move.dir/clean
 CMakeFiles/interp.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/interp.dir/build.make CMakeFiles/interp.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/interp.dir/build.make CMakeFiles/interp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles --progress-num=5,6 "Built target interp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles --progress-num=7,8,9 "Built target interp"
 .PHONY : CMakeFiles/interp.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/interp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/interp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles 0
 .PHONY : CMakeFiles/interp.dir/rule
@@ -127,7 +129,7 @@ CMakeFiles/interp.dir/clean:
 CMakeFiles/doc.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/doc.dir/build.make CMakeFiles/doc.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/doc.dir/build.make CMakeFiles/doc.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles --progress-num=4 "Built target doc"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles --progress-num=6 "Built target doc"
 .PHONY : CMakeFiles/doc.dir/all
 
 # Build rule for subdir invocation for target.
@@ -179,7 +181,7 @@ CMakeFiles/show_help.dir/clean:
 CMakeFiles/clean_all.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clean_all.dir/build.make CMakeFiles/clean_all.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clean_all.dir/build.make CMakeFiles/clean_all.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles --progress-num=3 "Built target clean_all"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles --progress-num=5 "Built target clean_all"
 .PHONY : CMakeFiles/clean_all.dir/all
 
 # Build rule for subdir invocation for target.
@@ -223,6 +225,32 @@ Interp4Move: plugin/CMakeFiles/Interp4Move.dir/rule
 plugin/CMakeFiles/Interp4Move.dir/clean:
 	$(MAKE) $(MAKESILENT) -f plugin/CMakeFiles/Interp4Move.dir/build.make plugin/CMakeFiles/Interp4Move.dir/clean
 .PHONY : plugin/CMakeFiles/Interp4Move.dir/clean
+
+#=============================================================================
+# Target rules for target plugin/CMakeFiles/Interp4Rotate.dir
+
+# All Build rule for target.
+plugin/CMakeFiles/Interp4Rotate.dir/all:
+	$(MAKE) $(MAKESILENT) -f plugin/CMakeFiles/Interp4Rotate.dir/build.make plugin/CMakeFiles/Interp4Rotate.dir/depend
+	$(MAKE) $(MAKESILENT) -f plugin/CMakeFiles/Interp4Rotate.dir/build.make plugin/CMakeFiles/Interp4Rotate.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles --progress-num=3,4 "Built target Interp4Rotate"
+.PHONY : plugin/CMakeFiles/Interp4Rotate.dir/all
+
+# Build rule for subdir invocation for target.
+plugin/CMakeFiles/Interp4Rotate.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 plugin/CMakeFiles/Interp4Rotate.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles 0
+.PHONY : plugin/CMakeFiles/Interp4Rotate.dir/rule
+
+# Convenience name for target.
+Interp4Rotate: plugin/CMakeFiles/Interp4Rotate.dir/rule
+.PHONY : Interp4Rotate
+
+# clean rule for target.
+plugin/CMakeFiles/Interp4Rotate.dir/clean:
+	$(MAKE) $(MAKESILENT) -f plugin/CMakeFiles/Interp4Rotate.dir/build.make plugin/CMakeFiles/Interp4Rotate.dir/clean
+.PHONY : plugin/CMakeFiles/Interp4Rotate.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

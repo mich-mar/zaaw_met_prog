@@ -475,7 +475,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program"
+			"value" : "/home/michal/Documents/studia/sem_7/zaaw_met_prog/program"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1139,7 +1139,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program"
+			"value" : "/home/michal/Documents/studia/sem_7/zaaw_met_prog/program"
 		}
 	],
 	"kind" : "cache",

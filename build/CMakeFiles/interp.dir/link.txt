@@ -1,1 +1,1 @@
-/usr/bin/c++  -g -O0 -g CMakeFiles/interp.dir/src/main.cpp.o -o interp  -Wl,-rpath,/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin -ldl 
+/usr/bin/c++  -g -O0 -g CMakeFiles/interp.dir/src/main.cpp.o CMakeFiles/interp.dir/src/preprocesor.cpp.o -o interp  -Wl,-rpath,/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin -ldl 

@@ -1,5 +1,4 @@
-#include "preprocesor.hpp" // Dołączamy własny plik nagłówkowy
-
+#include "preprocesor.hh"
 #include <iostream>
 #include <sstream>
 #include <cstdio>

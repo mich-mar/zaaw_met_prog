@@ -8,7 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/src/main.cpp" "CMakeFiles/interp.dir/src/main.cpp.o" "gcc" "CMakeFiles/interp.dir/src/main.cpp.o.d"
+  "/home/michal/Documents/studia/sem_7/zaaw_met_prog/program/src/main.cpp" "CMakeFiles/interp.dir/src/main.cpp.o" "gcc" "CMakeFiles/interp.dir/src/main.cpp.o.d"
+  "/home/michal/Documents/studia/sem_7/zaaw_met_prog/program/src/preprocesor.cpp" "CMakeFiles/interp.dir/src/preprocesor.cpp.o" "gcc" "CMakeFiles/interp.dir/src/preprocesor.cpp.o.d"
   )
 
 # Targets to which this target links.

@@ -57,7 +57,7 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program
+CMAKE_SOURCE_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/program
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/build
@@ -130,6 +130,20 @@ Interp4Move/fast:
 	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build && $(MAKE) $(MAKESILENT) -f plugin/CMakeFiles/Interp4Move.dir/build.make plugin/CMakeFiles/Interp4Move.dir/build
 .PHONY : Interp4Move/fast
 
+# Convenience name for target.
+plugin/CMakeFiles/Interp4Rotate.dir/rule:
+	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 plugin/CMakeFiles/Interp4Rotate.dir/rule
+.PHONY : plugin/CMakeFiles/Interp4Rotate.dir/rule
+
+# Convenience name for target.
+Interp4Rotate: plugin/CMakeFiles/Interp4Rotate.dir/rule
+.PHONY : Interp4Rotate
+
+# fast build rule for target.
+Interp4Rotate/fast:
+	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build && $(MAKE) $(MAKESILENT) -f plugin/CMakeFiles/Interp4Rotate.dir/build.make plugin/CMakeFiles/Interp4Rotate.dir/build
+.PHONY : Interp4Rotate/fast
+
 src/Interp4Move.o: src/Interp4Move.cpp.o
 .PHONY : src/Interp4Move.o
 
@@ -154,6 +168,30 @@ src/Interp4Move.cpp.s:
 	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build && $(MAKE) $(MAKESILENT) -f plugin/CMakeFiles/Interp4Move.dir/build.make plugin/CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.s
 .PHONY : src/Interp4Move.cpp.s
 
+src/Interp4Rotate.o: src/Interp4Rotate.cpp.o
+.PHONY : src/Interp4Rotate.o
+
+# target to build an object file
+src/Interp4Rotate.cpp.o:
+	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build && $(MAKE) $(MAKESILENT) -f plugin/CMakeFiles/Interp4Rotate.dir/build.make plugin/CMakeFiles/Interp4Rotate.dir/src/Interp4Rotate.cpp.o
+.PHONY : src/Interp4Rotate.cpp.o
+
+src/Interp4Rotate.i: src/Interp4Rotate.cpp.i
+.PHONY : src/Interp4Rotate.i
+
+# target to preprocess a source file
+src/Interp4Rotate.cpp.i:
+	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build && $(MAKE) $(MAKESILENT) -f plugin/CMakeFiles/Interp4Rotate.dir/build.make plugin/CMakeFiles/Interp4Rotate.dir/src/Interp4Rotate.cpp.i
+.PHONY : src/Interp4Rotate.cpp.i
+
+src/Interp4Rotate.s: src/Interp4Rotate.cpp.s
+.PHONY : src/Interp4Rotate.s
+
+# target to generate assembly for a file
+src/Interp4Rotate.cpp.s:
+	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build && $(MAKE) $(MAKESILENT) -f plugin/CMakeFiles/Interp4Rotate.dir/build.make plugin/CMakeFiles/Interp4Rotate.dir/src/Interp4Rotate.cpp.s
+.PHONY : src/Interp4Rotate.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -163,9 +201,13 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Interp4Move"
+	@echo "... Interp4Rotate"
 	@echo "... src/Interp4Move.o"
 	@echo "... src/Interp4Move.i"
 	@echo "... src/Interp4Move.s"
+	@echo "... src/Interp4Rotate.o"
+	@echo "... src/Interp4Rotate.i"
+	@echo "... src/Interp4Rotate.s"
 .PHONY : help
 
 

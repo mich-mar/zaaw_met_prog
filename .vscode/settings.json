@@ -1,6 +1,10 @@
 {
-    "cmake.sourceDirectory": "/home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program",
-    "files.associations": {
-        "stdexcept": "cpp"
-    }
+    // Ustawia katalog, w którym jest główny CMakeLists.txt
+    "cmake.sourceDirectory": "/home/michal/Documents/studia/sem_7/zaaw_met_prog/program",
+
+    // Ustawia katalog, w którym projekt będzie budowany
+    "cmake.buildDirectory": "${workspaceFolder}/build",
+
+    // Automatycznie konfiguruj przy otwarciu projektu
+    "cmake.configureOnOpen": true
 }

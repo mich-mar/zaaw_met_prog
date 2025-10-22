@@ -1,0 +1,30 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "C++ Launch (interp)",
+            "type": "cppdbg",
+            "request": "launch",
+            // Ścieżka do pliku wykonywalnego
+            "program": "${workspaceFolder}/build/interp",
+            "args": [],
+            "stopAtEntry": false,
+            
+            // --- TO JEST KLUCZOWA ZMIANA ---
+            // Ustawia katalog roboczy (CWD) na 'build'
+            // Dzięki temu program znajdzie 'test_preproc.spr' i biblioteki '.so'
+            "cwd": "${workspaceFolder}/build",
+            
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}

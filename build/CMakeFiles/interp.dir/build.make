@@ -53,7 +53,7 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program
+CMAKE_SOURCE_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/program
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/build
@@ -70,30 +70,46 @@ include CMakeFiles/interp.dir/progress.make
 include CMakeFiles/interp.dir/flags.make
 
 CMakeFiles/interp.dir/src/main.cpp.o: CMakeFiles/interp.dir/flags.make
-CMakeFiles/interp.dir/src/main.cpp.o: /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/src/main.cpp
+CMakeFiles/interp.dir/src/main.cpp.o: /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/src/main.cpp
 CMakeFiles/interp.dir/src/main.cpp.o: CMakeFiles/interp.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/interp.dir/src/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/interp.dir/src/main.cpp.o -MF CMakeFiles/interp.dir/src/main.cpp.o.d -o CMakeFiles/interp.dir/src/main.cpp.o -c /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/src/main.cpp
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/interp.dir/src/main.cpp.o -MF CMakeFiles/interp.dir/src/main.cpp.o.d -o CMakeFiles/interp.dir/src/main.cpp.o -c /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/src/main.cpp
 
 CMakeFiles/interp.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/interp.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/src/main.cpp > CMakeFiles/interp.dir/src/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/src/main.cpp > CMakeFiles/interp.dir/src/main.cpp.i
 
 CMakeFiles/interp.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/interp.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/src/main.cpp -o CMakeFiles/interp.dir/src/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/src/main.cpp -o CMakeFiles/interp.dir/src/main.cpp.s
+
+CMakeFiles/interp.dir/src/preprocesor.cpp.o: CMakeFiles/interp.dir/flags.make
+CMakeFiles/interp.dir/src/preprocesor.cpp.o: /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/src/preprocesor.cpp
+CMakeFiles/interp.dir/src/preprocesor.cpp.o: CMakeFiles/interp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/interp.dir/src/preprocesor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/interp.dir/src/preprocesor.cpp.o -MF CMakeFiles/interp.dir/src/preprocesor.cpp.o.d -o CMakeFiles/interp.dir/src/preprocesor.cpp.o -c /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/src/preprocesor.cpp
+
+CMakeFiles/interp.dir/src/preprocesor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/interp.dir/src/preprocesor.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/src/preprocesor.cpp > CMakeFiles/interp.dir/src/preprocesor.cpp.i
+
+CMakeFiles/interp.dir/src/preprocesor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/interp.dir/src/preprocesor.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/src/preprocesor.cpp -o CMakeFiles/interp.dir/src/preprocesor.cpp.s
 
 # Object files for target interp
 interp_OBJECTS = \
-"CMakeFiles/interp.dir/src/main.cpp.o"
+"CMakeFiles/interp.dir/src/main.cpp.o" \
+"CMakeFiles/interp.dir/src/preprocesor.cpp.o"
 
 # External object files for target interp
 interp_EXTERNAL_OBJECTS =
 
 interp: CMakeFiles/interp.dir/src/main.cpp.o
+interp: CMakeFiles/interp.dir/src/preprocesor.cpp.o
 interp: CMakeFiles/interp.dir/build.make
 interp: CMakeFiles/interp.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable interp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable interp"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/interp.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -105,6 +121,6 @@ CMakeFiles/interp.dir/clean:
 .PHONY : CMakeFiles/interp.dir/clean
 
 CMakeFiles/interp.dir/depend:
-	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program /home/michal/Documents/studia/sem_7/zaaw_met_prog/build /home/michal/Documents/studia/sem_7/zaaw_met_prog/build /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles/interp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/michal/Documents/studia/sem_7/zaaw_met_prog/program /home/michal/Documents/studia/sem_7/zaaw_met_prog/program /home/michal/Documents/studia/sem_7/zaaw_met_prog/build /home/michal/Documents/studia/sem_7/zaaw_met_prog/build /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles/interp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/interp.dir/depend
 

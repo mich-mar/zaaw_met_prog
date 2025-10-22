@@ -1,5 +1,5 @@
-#ifndef PREPROCESOR_HPP
-#define PREPROCESOR_HPP
+#ifndef PREPROCESOR_HH
+#define PREPROCESOR_HH
 
 #include <string>
 
@@ -14,4 +14,4 @@
  */
 std::string uruchomPreprocesor(const std::string& nazwaPliku);
 
-#endif // PREPROCESOR_HPP
+#endif // PREPROCESOR_HH

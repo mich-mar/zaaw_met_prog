@@ -53,7 +53,7 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program
+CMAKE_SOURCE_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/program
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/build
@@ -70,18 +70,18 @@ include plugin/CMakeFiles/Interp4Move.dir/progress.make
 include plugin/CMakeFiles/Interp4Move.dir/flags.make
 
 plugin/CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.o: plugin/CMakeFiles/Interp4Move.dir/flags.make
-plugin/CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.o: /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/plugin/src/Interp4Move.cpp
+plugin/CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.o: /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/plugin/src/Interp4Move.cpp
 plugin/CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.o: plugin/CMakeFiles/Interp4Move.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object plugin/CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.o"
-	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT plugin/CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.o -MF CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.o.d -o CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.o -c /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/plugin/src/Interp4Move.cpp
+	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT plugin/CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.o -MF CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.o.d -o CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.o -c /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/plugin/src/Interp4Move.cpp
 
 plugin/CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.i"
-	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/plugin/src/Interp4Move.cpp > CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.i
+	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/plugin/src/Interp4Move.cpp > CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.i
 
 plugin/CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.s"
-	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/plugin/src/Interp4Move.cpp -o CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.s
+	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/plugin/src/Interp4Move.cpp -o CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.s
 
 # Object files for target Interp4Move
 Interp4Move_OBJECTS = \
@@ -105,6 +105,6 @@ plugin/CMakeFiles/Interp4Move.dir/clean:
 .PHONY : plugin/CMakeFiles/Interp4Move.dir/clean
 
 plugin/CMakeFiles/Interp4Move.dir/depend:
-	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/plugin /home/michal/Documents/studia/sem_7/zaaw_met_prog/build /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin/CMakeFiles/Interp4Move.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/michal/Documents/studia/sem_7/zaaw_met_prog/program /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/plugin /home/michal/Documents/studia/sem_7/zaaw_met_prog/build /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin/CMakeFiles/Interp4Move.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : plugin/CMakeFiles/Interp4Move.dir/depend
 

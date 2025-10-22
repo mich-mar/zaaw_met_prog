@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DInterp4Rotate_EXPORTS
 
-CXX_INCLUDES = -I/home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/plugin/inc -I/home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/inc
+CXX_INCLUDES = -I/home/michal/Documents/studia/sem_7/zaaw_met_prog/program/plugin/inc -I/home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc
 
 CXX_FLAGS =  -g -O0 -g -fPIC -fPIC -Wall -Wextra -Wpedantic -Wshadow -Wformat=2 -Wunused -Wnull-dereference -Wconversion -Wno-unused-parameter -std=gnu++17
 

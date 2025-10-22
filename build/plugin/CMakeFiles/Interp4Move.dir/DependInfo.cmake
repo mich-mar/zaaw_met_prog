@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/plugin/src/Interp4Move.cpp" "plugin/CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.o" "gcc" "plugin/CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.o.d"
+  "/home/michal/Documents/studia/sem_7/zaaw_met_prog/program/plugin/src/Interp4Move.cpp" "plugin/CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.o" "gcc" "plugin/CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.o.d"
   )
 
 # Targets to which this target links.

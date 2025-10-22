@@ -57,7 +57,7 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program
+CMAKE_SOURCE_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/program
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/build
@@ -181,6 +181,19 @@ Interp4Move/fast:
 	$(MAKE) $(MAKESILENT) -f plugin/CMakeFiles/Interp4Move.dir/build.make plugin/CMakeFiles/Interp4Move.dir/build
 .PHONY : Interp4Move/fast
 
+#=============================================================================
+# Target rules for targets named Interp4Rotate
+
+# Build rule for target.
+Interp4Rotate: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Interp4Rotate
+.PHONY : Interp4Rotate
+
+# fast build rule for target.
+Interp4Rotate/fast:
+	$(MAKE) $(MAKESILENT) -f plugin/CMakeFiles/Interp4Rotate.dir/build.make plugin/CMakeFiles/Interp4Rotate.dir/build
+.PHONY : Interp4Rotate/fast
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -205,6 +218,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/interp.dir/build.make CMakeFiles/interp.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/preprocesor.o: src/preprocesor.cpp.o
+.PHONY : src/preprocesor.o
+
+# target to build an object file
+src/preprocesor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/interp.dir/build.make CMakeFiles/interp.dir/src/preprocesor.cpp.o
+.PHONY : src/preprocesor.cpp.o
+
+src/preprocesor.i: src/preprocesor.cpp.i
+.PHONY : src/preprocesor.i
+
+# target to preprocess a source file
+src/preprocesor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/interp.dir/build.make CMakeFiles/interp.dir/src/preprocesor.cpp.i
+.PHONY : src/preprocesor.cpp.i
+
+src/preprocesor.s: src/preprocesor.cpp.s
+.PHONY : src/preprocesor.s
+
+# target to generate assembly for a file
+src/preprocesor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/interp.dir/build.make CMakeFiles/interp.dir/src/preprocesor.cpp.s
+.PHONY : src/preprocesor.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -217,10 +254,14 @@ help:
 	@echo "... doc"
 	@echo "... show_help"
 	@echo "... Interp4Move"
+	@echo "... Interp4Rotate"
 	@echo "... interp"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/preprocesor.o"
+	@echo "... src/preprocesor.i"
+	@echo "... src/preprocesor.s"
 .PHONY : help
 
 

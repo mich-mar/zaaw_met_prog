@@ -1,4 +1,4 @@
-# Install script for directory: /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program
+# Install script for directory: /home/michal/Documents/studia/sem_7/zaaw_met_prog/program
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

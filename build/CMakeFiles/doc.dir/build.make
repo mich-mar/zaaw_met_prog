@@ -53,7 +53,7 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program
+CMAKE_SOURCE_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/program
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/build
@@ -68,7 +68,7 @@ include CMakeFiles/doc.dir/progress.make
 
 CMakeFiles/doc:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating API documentation with Doxygen..."
-	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/dox && /usr/bin/doxygen /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program/dox/Doxyfile
+	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/dox && /usr/bin/doxygen /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/dox/Doxyfile
 
 doc: CMakeFiles/doc
 doc: CMakeFiles/doc.dir/build.make
@@ -83,6 +83,6 @@ CMakeFiles/doc.dir/clean:
 .PHONY : CMakeFiles/doc.dir/clean
 
 CMakeFiles/doc.dir/depend:
-	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program /home/michal/Documents/studia/sem_7/zaaw_met_prog/build /home/michal/Documents/studia/sem_7/zaaw_met_prog/build /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles/doc.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/michal/Documents/studia/sem_7/zaaw_met_prog/program /home/michal/Documents/studia/sem_7/zaaw_met_prog/program /home/michal/Documents/studia/sem_7/zaaw_met_prog/build /home/michal/Documents/studia/sem_7/zaaw_met_prog/build /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles/doc.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/doc.dir/depend
 

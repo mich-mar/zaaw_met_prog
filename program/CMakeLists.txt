@@ -16,7 +16,10 @@ endif()
 
 add_subdirectory(plugin)
 
-add_executable(interp src/main.cpp)
+add_executable(interp src/main.cpp src/preprocesor.cpp)
+
+# Kopiuje plik .spr do katalogu 'build', aby był dostępny dla programu 'interp'
+configure_file(test_preproc.spr test_preproc.spr COPYONLY)
 
 # Dodajemy katalog "inc" do ścieżek include
 target_include_directories(interp PUBLIC inc)

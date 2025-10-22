@@ -53,7 +53,7 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program
+CMAKE_SOURCE_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/program
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/michal/Documents/studia/sem_7/zaaw_met_prog/build
@@ -86,6 +86,6 @@ CMakeFiles/show_help.dir/clean:
 .PHONY : CMakeFiles/show_help.dir/clean
 
 CMakeFiles/show_help.dir/depend:
-	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program /home/michal/Documents/studia/sem_7/zaaw_met_prog/etap_1/program /home/michal/Documents/studia/sem_7/zaaw_met_prog/build /home/michal/Documents/studia/sem_7/zaaw_met_prog/build /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles/show_help.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/michal/Documents/studia/sem_7/zaaw_met_prog/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/michal/Documents/studia/sem_7/zaaw_met_prog/program /home/michal/Documents/studia/sem_7/zaaw_met_prog/program /home/michal/Documents/studia/sem_7/zaaw_met_prog/build /home/michal/Documents/studia/sem_7/zaaw_met_prog/build /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles/show_help.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/show_help.dir/depend
 
