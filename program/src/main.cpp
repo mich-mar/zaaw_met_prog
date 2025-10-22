@@ -9,7 +9,6 @@
 #include <stdexcept>
 #include <fstream> 
 
-
 int main()
 {
   // Wskaźniki na funkcję tworzącą obiekt komendy (CreateCmd)
