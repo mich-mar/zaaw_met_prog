@@ -20,14 +20,19 @@
  */
 class Interp4Rotate: public AbstractInterp4Command {
 
-  double  _Angle_deg;  /*!< Kąt obrotu w stopniach */
+  /**
+   * @brief Przechowuje wczytane parametry polecenia
+   */
+  double _AngVel_Roll_deg_s = 0;  // Prędkość obrotu (Roll)
+  double _AngVel_Pitch_deg_s = 0; // Prędkość obrotu (Pitch)
+  double _AngVel_Yaw_deg_s = 0;   // Prędkość obrotu (Yaw)
 
 public:
 
   /*!
    * \brief
    */
-  Interp4Rotate();  
+  Interp4Rotate() = default;  
 
   /*!
    * \brief Wyświetla postać bieżącego polecenia (nazwę oraz wartości parametrów)
@@ -42,7 +47,7 @@ public:
   /*!
    * \brief Wyświetla wartości wczytanych parametrów
    */
-  virtual void PrintParams() const override {} 
+  virtual void PrintParams() const override;
 
   /*!
    * \brief Wyświetla nazwę polecenia

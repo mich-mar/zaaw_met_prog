@@ -1,13 +1,24 @@
-// Plik testowy dla preprocesora
-// Sprawdza usuwanie komentarzy
+// Plik testowy dla interpretera
+// Zawiera testy dla 4 wtyczek.
 
-#define MAKRO_TESTOWE 123 456
-#define PRZESUNIECIE 40 40
+// Definicja makra dla polecenia Move
+#define IDZ Move
 
-/* To jest komentarz
-   blokowy.
-*/
+/*
+ * Sekwencja testowa
+ */
 
-linia_z_makrem MAKRO_TESTOWE
-inna_linia PRZESUNIECIE
-linia_bez_makra
+// Ustaw pozycję początkową
+Set 0 0 10 0 0 45
+
+// Podejdź do obiektu (używając makra)
+IDZ 50 100 20
+
+// Obróć się
+Rotate 0 0 90
+
+// Zaczekaj
+Pause 1500
+
+// Wróć
+Move -10 0 0

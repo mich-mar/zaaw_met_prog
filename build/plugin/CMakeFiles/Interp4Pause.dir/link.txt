@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC  -g -O0 -g -shared -Wl,-soname,libInterp4Pause.so -o libInterp4Pause.so CMakeFiles/Interp4Pause.dir/src/Interp4Pause.cpp.o 

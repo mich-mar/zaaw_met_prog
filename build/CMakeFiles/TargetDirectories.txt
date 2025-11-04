@@ -6,5 +6,7 @@
 /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/CMakeFiles/rebuild_cache.dir
 /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin/CMakeFiles/Interp4Move.dir
 /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin/CMakeFiles/Interp4Rotate.dir
+/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin/CMakeFiles/Interp4Pause.dir
+/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin/CMakeFiles/Interp4Set.dir
 /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin/CMakeFiles/edit_cache.dir
 /home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin/CMakeFiles/rebuild_cache.dir

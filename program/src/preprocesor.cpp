@@ -6,10 +6,9 @@
 
 #define BUFFER_SIZE 512
 
-// Implementacja funkcji
-std::string uruchomPreprocesor(const std::string& nazwaPliku) {
+std::string runPreprocesor(const std::string& nazwaPliku) {
     
-    std::string polecenie = "cpp " + nazwaPliku;
+    std::string polecenie = "cpp -P " + nazwaPliku;
     FILE* potok = popen(polecenie.c_str(), "r");
     
     if (!potok) {

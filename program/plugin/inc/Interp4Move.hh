@@ -18,20 +18,22 @@
 /*!
  * \brief Modeluje polecenie dla robota mobilnego, które wymusza jego ruch do przodu
  *
- *  Klasa modeluj47e ...
+ *  Klasa modeluje ...
  */
 class Interp4Move: public AbstractInterp4Command {
-  /*
-   *  Tu należy zdefiniować pola, które są niezbędne
-   *  do przechowywania wartości parametrów danego polecenia.
-   *  Ponieżej zdefiniowane jest tylko jedno pole jako przykład.
+
+  /**
+   * @brief Przechowuje wczytane parametry polecenia
    */
-  double  _Speed_mmS;
+  double _VelX_mm_s = 0; // Prędkość X
+  double _VelY_mm_s = 0; // Prędkość Y
+  double _VelZ_mm_s = 0; // Prędkość Z
+
  public:
   /*!
    * \brief
    */
-  Interp4Move();  
+  Interp4Move() = default;  
   /*!
    * \brief Wyświetla postać bieżącego polecenia (nazwę oraz wartości parametrów)
    */
@@ -43,7 +45,7 @@ class Interp4Move: public AbstractInterp4Command {
   /*!
    * \brief Wyświetla wartości wczytanych parametrów
    */
-  virtual void PrintParams() const override {} 
+  virtual void PrintParams() const override;
 
   /*!
    * \brief Wyświetla nazwę polecenia

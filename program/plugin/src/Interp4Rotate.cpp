@@ -1,83 +1,67 @@
-#include <iostream>
 #include "Interp4Rotate.hh"
+#include <iostream>
 
+/**
+ * @brief Tworzy instancję obiektu polecenia
+ */
 extern "C" {
-  AbstractInterp4Command* CreateCmd(void);
-  const char* GetCmdName() { return "Rotate"; }
+  AbstractInterp4Command* CreateCmd(void) {
+    return new Interp4Rotate();
+  }
 }
 
-/*!
- * \brief
- *
- *
+/**
+ * @brief Zwraca nazwę polecenia
  */
-AbstractInterp4Command* CreateCmd(void)
-{
-  return Interp4Rotate::CreateCmd();
+extern "C" {
+  const char* GetCmdName(void) {
+    return "Rotate";
+  }
 }
 
-/*!
- *
+/**
+ * @brief Wczytuje parametry polecenia (3x double) ze strumienia.
  */
-Interp4Rotate::Interp4Rotate(): _Angle_deg(0)
-{}
-
-/*!
- *
- */
-void Interp4Rotate::PrintCmd() const
-{
-  /*
-   *  Tu trzeba napisać odpowiednio zmodyfikować kod poniżej.
-   */
-  std::cout << GetCmdName() << " " << _Angle_deg  << " 10  2" << std::endl;
-}
-
-/*!
- *
- */
-const char* Interp4Rotate::GetCmdName() const
-{
-  return ::GetCmdName();
-}
-
-/*!
- *
- */
-bool Interp4Rotate::ExecCmd( AbstractScene      &rScn, 
-                           const char         *sMobObjName,
-			   AbstractComChannel &rComChann
-			 )
-{
-  /*
-   *  Tu trzeba napisać odpowiedni kod.
-   */
+bool Interp4Rotate::ReadParams(std::istream &rStrm_CmdsList) {
+  if (!(rStrm_CmdsList >> _AngVel_Roll_deg_s >> _AngVel_Pitch_deg_s >> _AngVel_Yaw_deg_s)) {
+    // Jeśli się nie udało (np. koniec pliku, zły format)
+    return false;
+  }
   return true;
 }
 
-/*!
- *
+/**
+ * @brief Wyświetla pełną postać polecenia (z wczytanymi parametrami)
  */
-bool Interp4Rotate::ReadParams(std::istream& Strm_CmdsList)
-{
-  /*
-   *  Tu trzeba napisać odpowiedni kod.
-   */
+void Interp4Rotate::PrintCmd() const {
+  std::cout << GetCmdName() << " " << _AngVel_Roll_deg_s << " " << _AngVel_Pitch_deg_s << " " << _AngVel_Yaw_deg_s << std::endl;
+}
+
+/**
+ * @brief Zwraca nazwę polecenia
+ */
+const char* Interp4Rotate::GetCmdName() const {
+  return "Rotate";
+}
+
+/**
+ * @brief Wyświetla składnię polecenia
+ */
+void Interp4Rotate::PrintSyntax() const {
+  std::cout << "Syntax: Rotate [AngVel_Roll] [AngVel_Pitch] [AngVel_Yaw]" << std::endl;
+}
+
+/**
+ * @brief Wyświetla same parametry
+ */
+void Interp4Rotate::PrintParams() const {
+  std::cout << " Roll: " << _AngVel_Roll_deg_s << ", Pitch: " << _AngVel_Pitch_deg_s << ", Yaw: " << _AngVel_Yaw_deg_s << std::endl;
+}
+
+/**
+ * @brief Wykonuje polecenie (na razie puste)
+ */
+bool Interp4Rotate::ExecCmd(AbstractScene &rScn, const char *sMobObjName, AbstractComChannel &rComChann) {
+  std::cout << "ExecCmd for Rotate - not implemented in Stage 1." << std::endl;
   return true;
-}
-
-/*!
- *
- */
-AbstractInterp4Command* Interp4Rotate::CreateCmd()
-{
-  return new Interp4Rotate();
-}
-
-/*!
- *
- */
-void Interp4Rotate::PrintSyntax() const
-{
-  std::cout << "   Rotate  NazwaObiektu  Szybkosc[m/s]  DlugoscDrogi[m]" << std::endl;
 }

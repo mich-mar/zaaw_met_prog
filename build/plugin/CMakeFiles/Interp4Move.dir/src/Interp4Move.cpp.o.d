@@ -1,6 +1,13 @@
 plugin/CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.o: \
  /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/plugin/src/Interp4Move.cpp \
- /usr/include/stdc-predef.h /usr/include/c++/11/iostream \
+ /usr/include/stdc-predef.h \
+ /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/plugin/inc/Interp4Move.hh \
+ /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/AbstractInterp4Command.hh \
+ /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/AbstractScene.hh \
+ /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/AbstractMobileObj.hh \
+ /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/Vector3D.hh \
+ /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/geomVector.hh \
+ /usr/include/c++/11/iostream \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -145,15 +152,8 @@ plugin/CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.o: \
  /usr/include/c++/11/bits/locale_facets.tcc \
  /usr/include/c++/11/bits/basic_ios.tcc \
  /usr/include/c++/11/bits/ostream.tcc /usr/include/c++/11/istream \
- /usr/include/c++/11/bits/istream.tcc \
- /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/plugin/inc/Interp4Move.hh \
- /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/AbstractInterp4Command.hh \
- /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/AbstractScene.hh \
- /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/AbstractMobileObj.hh \
- /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/Vector3D.hh \
- /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/geomVector.hh \
- /usr/include/c++/11/cmath /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+ /usr/include/c++/11/bits/istream.tcc /usr/include/c++/11/cmath \
+ /usr/include/math.h /usr/include/x86_64-linux-gnu/bits/math-vector.h \
  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
  /usr/include/x86_64-linux-gnu/bits/fp-logb.h \

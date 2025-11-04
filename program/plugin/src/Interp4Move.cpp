@@ -1,98 +1,70 @@
-#include <iostream>
 #include "Interp4Move.hh"
+#include <iostream>
 
-
-using std::cout;
-using std::endl;
-
-
+/**
+ * @brief Tworzy instancję obiektu polecenia
+ */
 extern "C" {
-  AbstractInterp4Command* CreateCmd(void);
-  const char* GetCmdName() { return "Move"; }
+  AbstractInterp4Command* CreateCmd(void) {
+    return new Interp4Move();
+  }
 }
 
-
-
-
-/*!
- * \brief
- *
- *
+/**
+ * @brief Zwraca nazwę polecenia
  */
-AbstractInterp4Command* CreateCmd(void)
-{
-  return Interp4Move::CreateCmd();
+extern "C" {
+  const char* GetCmdName(void) {
+    return "Move";
+  }
 }
 
-
-/*!
- *
+/**
+ * @brief Wczytuje parametry polecenia (3x double) ze strumienia.
+ * * To jest kluczowa funkcja, która rozwiązuje Twój błąd.
+ * Czyta 3 liczby ze strumienia, "zabierając" je z niego,
+ * aby główna pętla interpretera mogła wczytać następne polecenie.
  */
-Interp4Move::Interp4Move(): _Speed_mmS(0)
-{}
-
-
-/*!
- *
- */
-void Interp4Move::PrintCmd() const
-{
-  /*
-   *  Tu trzeba napisać odpowiednio zmodyfikować kod poniżej.
-   */
-  cout << GetCmdName() << " " << _Speed_mmS  << " 10  2" << endl;
-}
-
-
-/*!
- *
- */
-const char* Interp4Move::GetCmdName() const
-{
-  return ::GetCmdName();
-}
-
-
-/*!
- *
- */
-bool Interp4Move::ExecCmd( AbstractScene      &rScn, 
-                           const char         *sMobObjName,
-			   AbstractComChannel &rComChann
-			 )
-{
-  /*
-   *  Tu trzeba napisać odpowiedni kod.
-   */
+bool Interp4Move::ReadParams(std::istream &rStrm_CmdsList) {
+  if (!(rStrm_CmdsList >> _VelX_mm_s >> _VelY_mm_s >> _VelZ_mm_s)) {
+    // Jeśli się nie udało (np. koniec pliku, zły format)
+    return false;
+  }
   return true;
 }
 
-
-/*!
- *
+/**
+ * @brief Wyświetla pełną postać polecenia (z wczytanymi parametrami)
  */
-bool Interp4Move::ReadParams(std::istream& Strm_CmdsList)
-{
-  /*
-   *  Tu trzeba napisać odpowiedni kod.
-   */
+void Interp4Move::PrintCmd() const {
+  std::cout << GetCmdName() << " " << _VelX_mm_s << " " << _VelY_mm_s << " " << _VelZ_mm_s << std::endl;
+}
+
+/**
+ * @brief Zwraca nazwę polecenia
+ */
+const char* Interp4Move::GetCmdName() const {
+  return "Move";
+}
+
+/**
+ * @brief Wyświetla składnię polecenia
+ */
+void Interp4Move::PrintSyntax() const {
+  std::cout << "Syntax: Move [VelX_mm/s] [VelY_mm/s] [VelZ_mm/s]" << std::endl;
+}
+
+/**
+ * @brief Wyświetla same parametry
+ */
+void Interp4Move::PrintParams() const {
+  std::cout << " VelX: " << _VelX_mm_s << ", VelY: " << _VelY_mm_s << ", VelZ: " << _VelZ_mm_s << std::endl;
+}
+
+/**
+ * @brief Wykonuje polecenie (na razie puste)
+ */
+bool Interp4Move::ExecCmd(AbstractScene &rScn, const char *sMobObjName, AbstractComChannel &rComChann) {
+  std::cout << "ExecCmd for Move - not implemented in Stage 1." << std::endl;
   return true;
-}
-
-
-/*!
- *
- */
-AbstractInterp4Command* Interp4Move::CreateCmd()
-{
-  return new Interp4Move();
-}
-
-
-/*!
- *
- */
-void Interp4Move::PrintSyntax() const
-{
-  cout << "   Move  NazwaObiektu  Szybkosc[m/s]  DlugoscDrogi[m]" << endl;
 }

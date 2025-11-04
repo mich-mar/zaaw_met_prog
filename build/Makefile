@@ -194,6 +194,32 @@ Interp4Rotate/fast:
 	$(MAKE) $(MAKESILENT) -f plugin/CMakeFiles/Interp4Rotate.dir/build.make plugin/CMakeFiles/Interp4Rotate.dir/build
 .PHONY : Interp4Rotate/fast
 
+#=============================================================================
+# Target rules for targets named Interp4Pause
+
+# Build rule for target.
+Interp4Pause: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Interp4Pause
+.PHONY : Interp4Pause
+
+# fast build rule for target.
+Interp4Pause/fast:
+	$(MAKE) $(MAKESILENT) -f plugin/CMakeFiles/Interp4Pause.dir/build.make plugin/CMakeFiles/Interp4Pause.dir/build
+.PHONY : Interp4Pause/fast
+
+#=============================================================================
+# Target rules for targets named Interp4Set
+
+# Build rule for target.
+Interp4Set: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Interp4Set
+.PHONY : Interp4Set
+
+# fast build rule for target.
+Interp4Set/fast:
+	$(MAKE) $(MAKESILENT) -f plugin/CMakeFiles/Interp4Set.dir/build.make plugin/CMakeFiles/Interp4Set.dir/build
+.PHONY : Interp4Set/fast
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -254,7 +280,9 @@ help:
 	@echo "... doc"
 	@echo "... show_help"
 	@echo "... Interp4Move"
+	@echo "... Interp4Pause"
 	@echo "... Interp4Rotate"
+	@echo "... Interp4Set"
 	@echo "... interp"
 	@echo "... src/main.o"
 	@echo "... src/main.i"

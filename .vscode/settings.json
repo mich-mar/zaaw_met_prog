@@ -6,5 +6,11 @@
     "cmake.buildDirectory": "${workspaceFolder}/build",
 
     // Automatycznie konfiguruj przy otwarciu projektu
-    "cmake.configureOnOpen": true
+    "cmake.configureOnOpen": true,
+    "files.associations": {
+        "optional": "cpp",
+        "variant": "cpp",
+        "cassert": "cpp",
+        "iostream": "cpp"
+    }
 }

@@ -12,6 +12,6 @@
  * @return std::string Zawartość pliku po przetworzeniu przez preprocesor.
  * @throws std::runtime_error Jeśli wykonanie polecenia popen nie powiodło się.
  */
-std::string uruchomPreprocesor(const std::string& nazwaPliku);
+std::string runPreprocesor(const std::string& nazwaPliku);
 
 #endif // PREPROCESOR_HH
