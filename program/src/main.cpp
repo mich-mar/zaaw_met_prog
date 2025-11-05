@@ -1,10 +1,22 @@
-/**
- * @file
- * @brief Główny plik programu interpretera.
+/*!
+ * @brief Główny plik wykonywalny interpretera poleceń.
  *
- * Odpowiada za wczytanie konfiguracji XML, dynamiczne ładowanie wtyczek (pluginów),
- * uruchomienie preprocesora na pliku wsadowym oraz pętlę interpretera
- * wykonującą polecenia.
+ * Program realizuje logikę interpretera, który jest dynamicznie
+ * konfigurowany przy starcie. Główne zadania:
+ *
+ * > Konfiguracja XML: Wczytuje `config.xml` (używając Xerces-C),
+ * aby pobrać listę wtyczek do załadowania.
+ *
+ * > Ładowanie Wtyczek: Dynamicznie ładuje biblioteki `.so`
+ * (przez `dlopen`) i buduje mapę poleceń (np. "Move" -> funkcja).
+ *
+ * > Przetwarzanie Skryptu: Wczytuje plik skryptu
+ * i przetwarza go przez preprocesor C (`cpp -P`), aby
+ * rozwinąć makra i usunąć komentarze.
+ *
+ * > Interpretacja Poleceń: Czyta czysty skrypt linia po linii,
+ * tworzy obiekty poleceń z mapy i wywołuje `ReadParams`,
+ * aby wczytać ich argumenty.
  */
 
 #include <iostream>
@@ -40,9 +52,9 @@ using Fun_GetCmdName = const char* (*)(void);
  */
 int main()
 {
-  // ------------------------------------------------------------------==
+  // ------------------------------------------------------------------
   // 1. Wczytanie konfiguracji XML
-  // ------------------------------------------------------------------==
+  // ------------------------------------------------------------------
   
   /**
    * @brief Obiekt przechowujący konfigurację wczytaną z XML.
@@ -63,9 +75,9 @@ int main()
     return 1;
   }
 
-  // ------------------------------------------------------------------==
+  // ------------------------------------------------------------------
   // 2. Definicja struktur danych interpretera
-  // ------------------------------------------------------------------==
+  // ------------------------------------------------------------------
 
   /**
    * @brief Mapa poleceń.
@@ -87,9 +99,9 @@ int main()
 
   std::cout << "--- ŁADOWANIE WTYCZEK (z config) ---" << std::endl;
 
-  // ------------------------------------------------------------------==
+  // ------------------------------------------------------------------
   // 3. Pętla ładowania wtyczek
-  // ------------------------------------------------------------------==
+  // ------------------------------------------------------------------
   
   /**
    * @brief Pętla iteruje po nazwach bibliotek pobranych z konfiguracji.
@@ -129,9 +141,9 @@ int main()
     std::cout << "  Załadowano polecenie: " << commandName << std::endl;
   }
 
-  // ------------------------------------------------------------------==
+  // ------------------------------------------------------------------
   // 4. Uruchomienie preprocesora
-  // ------------------------------------------------------------------==
+  // ------------------------------------------------------------------
   
   std::cout << "\n--- URUCHAMIANIE PREPROCESORA ---" << std::endl;
   
@@ -162,9 +174,9 @@ int main()
       }
   }
 
-  // ------------------------------------------------------------------==
+  // ------------------------------------------------------------------
   // 5. Pętla interpretera poleceń
-  // ------------------------------------------------------------------==
+  // ------------------------------------------------------------------
   
   std::cout << "\n--- URUCHAMIANIE INTERPRETERA ---" << std::endl;
   std::string commandName;
@@ -200,9 +212,9 @@ int main()
     delete pCommand; // Zwolnienie pamięci
   }
 
-  // ------------------------------------------------------------------==
+  // ------------------------------------------------------------------
   // 6. Zamykanie bibliotek
-  // ------------------------------------------------------------------==
+  // ------------------------------------------------------------------
   
   /**
    * @brief Sprzątanie - zwalnianie uchwytów do bibliotek dynamicznych.
