@@ -6,10 +6,8 @@
       "type": "cppdbg",
       "request": "launch",
 
-      // 1. Mówi, jaki program uruchomić:
       "program": "${workspaceFolder}/build/interp",
 
-      // 2. MÓWI, GDZIE GO URUCHOMIĆ (to jest rozwiązanie):
       "cwd": "${workspaceFolder}/build",
 
       "args": [],

@@ -1,3 +1,12 @@
+/**
+ * @file
+ * @brief Główny plik programu interpretera.
+ *
+ * Odpowiada za wczytanie konfiguracji XML, dynamiczne ładowanie wtyczek (pluginów),
+ * uruchomienie preprocesora na pliku wsadowym oraz pętlę interpretera
+ * wykonującą polecenia.
+ */
+
 #include <iostream>
 #include <dlfcn.h>    
 #include <cassert>
@@ -8,168 +17,198 @@
 #include <fstream>
 #include <map>        
 #include <list>         
+
 #include "AbstractInterp4Command.hh"
 #include "preprocesor.hh" 
+#include "Configuration.hh"
+#include "xmlinterp.hh"
 
-/*
- * Type definitions for function pointers from the libraries
- * This makes the code more readable.
+/**
+ * @brief Definicja typu wskaźnika na funkcję tworzącą polecenie.
+ * Każda wtyczka musi udostępniać funkcję tego typu (np. "CreateCmd").
  */
-// Pointer to the function creating a command object
 using Fun_CreateCmd = AbstractInterp4Command* (*)(void);
-// Pointer to the function getting the command name
+
+/**
+ * @brief Definicja typu wskaźnika na funkcję zwracającą nazwę polecenia.
+ * Każda wtyczka musi udostępniać funkcję tego typu (np. "GetCmdName").
+ */
 using Fun_GetCmdName = const char* (*)(void);
 
-
+/**
+ * @brief Główna funkcja programu.
+ */
 int main()
 {
-  // ====================================================================
-  // 1. Definition of interpreter data structures (Task 1.2)
-  // ====================================================================
-
-  // Map storing the association between a command name (e.g., "Move")
-  // and the function that creates an object of that command (CreateCmd).
-  std::map<std::string, Fun_CreateCmd> CommandMap;
-
-  // List storing handles to the open libraries,
-  // so they can be properly closed at the end of the program.
-  std::list<void*> LibraryHandles;
-
-  // List of libraries to load.
-  std::list<std::string> LibraryNames = {
-    "libInterp4Rotate.so",
-    "libInterp4Move.so",
-    "libInterp4Pause.so",
-    "libInterp4Set.so"
-  };
-
-  std::cout << "--- LOADING PLUGINS ---" << std::endl;
-
-  // ====================================================================
-  // 2. Plugin loading loop
-  // ====================================================================
+  // ------------------------------------------------------------------==
+  // 1. Wczytanie konfiguracji XML
+  // ------------------------------------------------------------------==
   
-  for (const std::string& LibraryName : LibraryNames) {
-    void* pLibraryHandle = dlopen(LibraryName.c_str(), RTLD_LAZY);
+  /**
+   * @brief Obiekt przechowujący konfigurację wczytaną z XML.
+   * Zawiera m.in. listę bibliotek (wtyczek) do załadowania.
+   */
+  Configuration config; 
+  
+  std::cout << "--- WCZYTYWANIE KONFIGURACJI (config.xml) ---" << std::endl;
+  try {
+    // Wywołujemy funkcję ReadXML z xmlinterp.hh
+    if (!ReadXML("config.xml", config)) { 
+      std::cerr << "!!! BŁĄD: Nie udało się wczytać 'config.xml'" << std::endl;
+      return 1;
+    }
+  }
+  catch (const std::runtime_error& e) {
+    std::cerr << "!!! Błąd wykonania parsera XML: " << e.what() << std::endl;
+    return 1;
+  }
+
+  // ------------------------------------------------------------------==
+  // 2. Definicja struktur danych interpretera
+  // ------------------------------------------------------------------==
+
+  /**
+   * @brief Mapa poleceń.
+   * Kluczem jest nazwa polecenia (np. "Begin"), wartością jest wskaźnik
+   * na funkcję tworzącą obiekt danej komendy (pobraną z wtyczki).
+   */
+  std::map<std::string, Fun_CreateCmd> commandMap;
+  
+  /**
+   * @brief Lista uchwytów do załadowanych bibliotek dynamicznych.
+   * Przechowywana, aby można było je poprawnie zamknąć na końcu programu.
+   */
+  std::list<void*> libraryHandles;
+
+  // Pobierz listę bibliotek z obiektu Konfiguracji
+  std::list<std::string> libraryNames;
+  // Używamy funkcji GetLibraries z Configuration.hh
+  config.GetLibraries(libraryNames); 
+
+  std::cout << "--- ŁADOWANIE WTYCZEK (z config) ---" << std::endl;
+
+  // ------------------------------------------------------------------==
+  // 3. Pętla ładowania wtyczek
+  // ------------------------------------------------------------------==
+  
+  /**
+   * @brief Pętla iteruje po nazwach bibliotek pobranych z konfiguracji.
+   */
+  for (const std::string& libraryName : libraryNames) {
+    void* pLibraryHandle = dlopen(libraryName.c_str(), RTLD_LAZY);
 
     if (!pLibraryHandle) {
-      std::cerr << "!!! ERROR: Could not open library: " << LibraryName << std::endl;
+      std::cerr << "!!! BŁĄD: Nie można otworzyć biblioteki: " << libraryName << std::endl;
       std::cerr << "!!!   " << dlerror() << std::endl;
-      continue; // Move to the next library
+      continue; 
     }
 
-    // Get pointer to the GetCmdName function
+    // Pobranie funkcji GetCmdName
     void* pFun_GetCmdName = dlsym(pLibraryHandle, "GetCmdName");
     if (!pFun_GetCmdName) {
-      std::cerr << "!!! ERROR: Could not find function GetCmdName in " << LibraryName << std::endl;
+      std::cerr << "!!! BŁĄD: Nie znaleziono funkcji GetCmdName w " << libraryName << std::endl;
       dlclose(pLibraryHandle);
       continue;
     }
     Fun_GetCmdName GetName = reinterpret_cast<Fun_GetCmdName>(pFun_GetCmdName);
 
-    // Get pointer to the CreateCmd function
+    // Pobranie funkcji CreateCmd
     void* pFun_CreateCmd = dlsym(pLibraryHandle, "CreateCmd");
     if (!pFun_CreateCmd) {
-      std::cerr << "!!! ERROR: Could not find function CreateCmd in " << LibraryName << std::endl;
+      std::cerr << "!!! BŁĄD: Nie znaleziono funkcji CreateCmd w " << libraryName << std::endl;
       dlclose(pLibraryHandle);
       continue;
     }
     Fun_CreateCmd CreateCommand = reinterpret_cast<Fun_CreateCmd>(pFun_CreateCmd);
 
-    // We have everything. Get the name and add it to the map.
-    std::string CommandName = GetName();
-    CommandMap[CommandName] = CreateCommand;
+    // Dodanie polecenia do mapy
+    std::string commandName = GetName();
+    commandMap[commandName] = CreateCommand;
     
-    // Store the handle to be closed later
-    LibraryHandles.push_back(pLibraryHandle);
-
-    std::cout << "  Loaded command: " << CommandName << std::endl;
+    libraryHandles.push_back(pLibraryHandle); // Zapisanie uchwytu do zamknięcia
+    std::cout << "  Załadowano polecenie: " << commandName << std::endl;
   }
 
-
-  // ====================================================================
-  // 3. Preprocessor Test
-  // ====================================================================
+  // ------------------------------------------------------------------==
+  // 4. Uruchomienie preprocesora
+  // ------------------------------------------------------------------==
   
-  std::cout << "\n--- TESTING PREPROCESSOR ---" << std::endl;
+  std::cout << "\n--- URUCHAMIANIE PREPROCESORA ---" << std::endl;
   
   const char* testFilename = "test_preproc.spr";
-  std::stringstream CommandStream; // Stream to store the preprocessor output
   
-  // 3.1. Check if the test file exists
+  /**
+   * @brief Strumień (w pamięci) przechowujący kod po przetworzeniu 
+   * przez preprocesor. Ten strumień będzie wejściem dla pętli 
+   * interpretera.
+   */
+  std::stringstream commandStream; 
+  
   std::ifstream testFile(testFilename);
   if (!testFile) {
-      std::cerr << "!!! ERROR: Test file not found '" << testFilename << "'" << std::endl;
-      std::cerr << "!!! Create it manually before running the test." << std::endl;
+      std::cerr << "!!! BŁĄD: Nie znaleziono pliku testowego '" << testFilename << "'" << std::endl;
   } else {
-      testFile.close(); // File exists, we can close it and continue
-      
-      // 3.2. Run the preprocessor on this file
+      testFile.close();
       try {
-          // Use the -P flag to skip extra line info
-          std::string result = runPreprocesor(testFilename);
-          std::cout << "--- Content of " << testFilename << " after preprocessor ---" << std::endl;
+          std::string result = runPreprocesor(testFilename); 
+          std::cout << "--- Zawartość " << testFilename << " po preprocesorze ---" << std::endl;
           std::cout << result;
           std::cout << "-----------------------------------------------" << std::endl;
           
-          // Store the result in the stream we will use in the interpreter loop
-          CommandStream.str(result);
-
+          // Zapisanie wyniku preprocesora do strumienia poleceń
+          commandStream.str(result);
       } catch (const std::runtime_error& e) {
-          std::cerr << "!!! Error during preprocessor test: " << e.what() << std::endl;
+          std::cerr << "!!! Błąd podczas testu preprocesora: " << e.what() << std::endl;
       }
   }
 
-  // ====================================================================
-  // 4. Command interpreter loop
-  // ====================================================================
+  // ------------------------------------------------------------------==
+  // 5. Pętla interpretera poleceń
+  // ------------------------------------------------------------------==
   
-  std::cout << "\n--- STARTING INTERPRETER ---" << std::endl;
-  std::string CommandName;
+  std::cout << "\n--- URUCHAMIANIE INTERPRETERA ---" << std::endl;
+  std::string commandName;
 
-  // The loop reads from the stream (filled by the preprocessor)
-  // word by word. The first word in a line is the command name.
-  while (CommandStream >> CommandName) {
+  /**
+   * @brief Główna pętla interpretera.
+   */
+  while (commandStream >> commandName) {
+    auto commandIter = commandMap.find(commandName);
 
-    // Check if the read command exists in our map
-    auto CommandIter = CommandMap.find(CommandName);
-
-    if (CommandIter == CommandMap.end()) {
-      std::cerr << "!!! ERROR: Unrecognized command: " << CommandName << std::endl;
-      // Skip the rest of this line
+    // Obsługa nieznanego polecenia
+    if (commandIter == commandMap.end()) {
+      std::cerr << "!!! BŁĄD: Nierozpoznane polecenie: " << commandName << std::endl;
       std::string restOfLine;
-      std::getline(CommandStream, restOfLine);
+      std::getline(commandStream, restOfLine); // Pomiń resztę linii
       continue;
     }
 
-    // Command found.
-    // 1. Get the creation function (CreateCmd) from the map
-    Fun_CreateCmd pCreateCommand = CommandIter->second;
-    // 2. Call it to create the command object
+    // Utworzenie obiektu polecenia
+    Fun_CreateCmd pCreateCommand = commandIter->second;
     AbstractInterp4Command *pCommand = pCreateCommand();
 
-    std::cout << "\n> Executing command: " << pCommand->GetCmdName() << std::endl;
+    std::cout << "\n> Wykonywanie polecenia: " << pCommand->GetCmdName() << std::endl;
 
-    // 3. Call ReadParams to read the rest of the parameters from the line
-    if (!pCommand->ReadParams(CommandStream)) {
-      std::cerr << "!!! ERROR: Incorrect parameters for command: " << CommandName << std::endl;
-      pCommand->PrintSyntax(); // Show the correct syntax
+    // Wczytanie parametrów i wykonanie
+    if (!pCommand->ReadParams(commandStream)) {
+      std::cerr << "!!! BŁĄD: Niepoprawne parametry dla polecenia: " << commandName << std::endl;
+      pCommand->PrintSyntax(); 
     } else {
-      // 4. Display the read parameters (Task 1.5)
       pCommand->PrintCmd();
     }
-
-    // 5. Delete the command object
-    delete pCommand;
+    
+    delete pCommand; // Zwolnienie pamięci
   }
 
-
-  // ====================================================================
-  // 5. Closing libraries
-  // ====================================================================
+  // ------------------------------------------------------------------==
+  // 6. Zamykanie bibliotek
+  // ------------------------------------------------------------------==
   
-  std::cout << "\n--- CLOSING LIBRARIES ---" << std::endl;
-  for (void* pLibraryHandle : LibraryHandles) {
+  /**
+   * @brief Sprzątanie - zwalnianie uchwytów do bibliotek dynamicznych.
+   */
+  std::cout << "\n--- ZAMYKANIE BIBLIOTEK ---" << std::endl;
+  for (void* pLibraryHandle : libraryHandles) {
     dlclose(pLibraryHandle);
   }
 

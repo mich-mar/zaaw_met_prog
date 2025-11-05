@@ -268,6 +268,30 @@ src/preprocesor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/interp.dir/build.make CMakeFiles/interp.dir/src/preprocesor.cpp.s
 .PHONY : src/preprocesor.cpp.s
 
+src/xmlinterp.o: src/xmlinterp.cpp.o
+.PHONY : src/xmlinterp.o
+
+# target to build an object file
+src/xmlinterp.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/interp.dir/build.make CMakeFiles/interp.dir/src/xmlinterp.cpp.o
+.PHONY : src/xmlinterp.cpp.o
+
+src/xmlinterp.i: src/xmlinterp.cpp.i
+.PHONY : src/xmlinterp.i
+
+# target to preprocess a source file
+src/xmlinterp.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/interp.dir/build.make CMakeFiles/interp.dir/src/xmlinterp.cpp.i
+.PHONY : src/xmlinterp.cpp.i
+
+src/xmlinterp.s: src/xmlinterp.cpp.s
+.PHONY : src/xmlinterp.s
+
+# target to generate assembly for a file
+src/xmlinterp.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/interp.dir/build.make CMakeFiles/interp.dir/src/xmlinterp.cpp.s
+.PHONY : src/xmlinterp.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -290,6 +314,9 @@ help:
 	@echo "... src/preprocesor.o"
 	@echo "... src/preprocesor.i"
 	@echo "... src/preprocesor.s"
+	@echo "... src/xmlinterp.o"
+	@echo "... src/xmlinterp.i"
+	@echo "... src/xmlinterp.s"
 .PHONY : help
 
 

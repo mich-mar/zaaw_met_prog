@@ -215,6 +215,15 @@ InterpreterProject_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 InterpreterProject_SOURCE_DIR:STATIC=/home/michal/Documents/studia/sem_7/zaaw_met_prog/program
 
+//Xerces-C++ include directory
+XercesC_INCLUDE_DIR:PATH=/usr/include
+
+//Xerces-C++ libraries (debug)
+XercesC_LIBRARY_DEBUG:FILEPATH=XercesC_LIBRARY_DEBUG-NOTFOUND
+
+//Xerces-C++ libraries (release)
+XercesC_LIBRARY_RELEASE:FILEPATH=/usr/lib/x86_64-linux-gnu/libxerces-c.so
+
 
 ########################
 # INTERNAL cache entries
@@ -351,4 +360,12 @@ DOXYGEN_DOT_EXECUTABLE-ADVANCED:INTERNAL=1
 DOXYGEN_EXECUTABLE-ADVANCED:INTERNAL=1
 //Details about finding Doxygen
 FIND_PACKAGE_MESSAGE_DETAILS_Doxygen:INTERNAL=[/usr/bin/doxygen][cfound components: doxygen dot ][v1.9.1()]
+//Details about finding XercesC
+FIND_PACKAGE_MESSAGE_DETAILS_XercesC:INTERNAL=[/usr/lib/x86_64-linux-gnu/libxerces-c.so][/usr/include][3.2.3][v3.2.3()]
+//ADVANCED property for variable: XercesC_INCLUDE_DIR
+XercesC_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: XercesC_LIBRARY_DEBUG
+XercesC_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: XercesC_LIBRARY_RELEASE
+XercesC_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 

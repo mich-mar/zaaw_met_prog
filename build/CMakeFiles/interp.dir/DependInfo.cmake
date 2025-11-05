@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/michal/Documents/studia/sem_7/zaaw_met_prog/program/src/main.cpp" "CMakeFiles/interp.dir/src/main.cpp.o" "gcc" "CMakeFiles/interp.dir/src/main.cpp.o.d"
   "/home/michal/Documents/studia/sem_7/zaaw_met_prog/program/src/preprocesor.cpp" "CMakeFiles/interp.dir/src/preprocesor.cpp.o" "gcc" "CMakeFiles/interp.dir/src/preprocesor.cpp.o.d"
+  "/home/michal/Documents/studia/sem_7/zaaw_met_prog/program/src/xmlinterp.cpp" "CMakeFiles/interp.dir/src/xmlinterp.cpp.o" "gcc" "CMakeFiles/interp.dir/src/xmlinterp.cpp.o.d"
   )
 
 # Targets to which this target links.

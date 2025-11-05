@@ -200,4 +200,38 @@ CMakeFiles/interp.dir/src/main.cpp.o: \
  /usr/include/c++/11/bits/parse_numbers.h \
  /usr/include/c++/11/bits/std_mutex.h \
  /usr/include/c++/11/bits/unique_lock.h \
- /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/preprocesor.hh
+ /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/preprocesor.hh \
+ /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/Configuration.hh \
+ /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/xmlinterp.hh \
+ /usr/include/xercesc/util/XMLString.hpp \
+ /usr/include/xercesc/util/BaseRefVectorOf.hpp \
+ /usr/include/xercesc/util/ArrayIndexOutOfBoundsException.hpp \
+ /usr/include/xercesc/util/XMLException.hpp \
+ /usr/include/xercesc/util/XercesDefs.hpp \
+ /usr/include/xercesc/util/Xerces_autoconf_config.hpp \
+ /usr/include/inttypes.h /usr/include/xercesc/util/XercesVersion.hpp \
+ /usr/include/xercesc/util/XMemory.hpp /usr/include/c++/11/stdlib.h \
+ /usr/include/xercesc/util/XMLExceptMsgs.hpp \
+ /usr/include/xercesc/dom/DOMError.hpp \
+ /usr/include/xercesc/util/XMLUni.hpp \
+ /usr/include/xercesc/framework/XMLErrorReporter.hpp \
+ /usr/include/xercesc/util/XMLEnumerator.hpp \
+ /usr/include/xercesc/util/PlatformUtils.hpp \
+ /usr/include/xercesc/util/PanicHandler.hpp \
+ /usr/include/xercesc/util/XMLFileMgr.hpp \
+ /usr/include/xercesc/util/XMLMutexMgr.hpp \
+ /usr/include/xercesc/framework/MemoryManager.hpp \
+ /usr/include/xercesc/util/BaseRefVectorOf.c \
+ /usr/include/xercesc/framework/XMLBuffer.hpp /usr/include/string.h \
+ /usr/include/strings.h /usr/include/xercesc/sax/Locator.hpp \
+ /usr/include/xercesc/sax2/Attributes.hpp \
+ /usr/include/xercesc/sax2/DefaultHandler.hpp \
+ /usr/include/xercesc/sax2/ContentHandler.hpp \
+ /usr/include/xercesc/sax2/LexicalHandler.hpp \
+ /usr/include/xercesc/sax2/DeclHandler.hpp \
+ /usr/include/xercesc/sax/DTDHandler.hpp \
+ /usr/include/xercesc/sax/EntityResolver.hpp \
+ /usr/include/xercesc/sax/ErrorHandler.hpp \
+ /usr/include/xercesc/sax/SAXParseException.hpp \
+ /usr/include/xercesc/sax/SAXException.hpp \
+ /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/Configuration.hh

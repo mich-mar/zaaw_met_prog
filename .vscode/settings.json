@@ -11,6 +11,7 @@
         "optional": "cpp",
         "variant": "cpp",
         "cassert": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "ostream": "cpp"
     }
 }

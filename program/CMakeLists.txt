@@ -4,6 +4,8 @@ project(InterpreterProject VERSION 0.1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+find_package(XercesC REQUIRED)
+
 option(BUILD_IN_DEBUG_MODE "Compile with debug flags" ON)
 
 if(BUILD_IN_DEBUG_MODE)
@@ -16,16 +18,21 @@ endif()
 
 add_subdirectory(plugin)
 
-add_executable(interp src/main.cpp src/preprocesor.cpp)
+add_executable(interp src/main.cpp 
+                src/preprocesor.cpp
+                src/xmlinterp.cpp)
 
 # Kopiuje plik .spr do katalogu 'build', aby był dostępny dla programu 'interp'
 configure_file(test_preproc.spr test_preproc.spr COPYONLY)
 
+# Kopiuje plik config.xml do katalogu 'build'
+configure_file(config.xml config.xml COPYONLY)
+
 # Dodajemy katalog "inc" do ścieżek include
-target_include_directories(interp PUBLIC inc)
+target_include_directories(interp PUBLIC inc ${XercesC_INCLUDE_DIR})
 
 # Linkujemy bibliotekę 'dl' (niezbędna do dynamicznego ładowania pluginów)
-target_link_libraries(interp PRIVATE dl)
+target_link_libraries(interp PRIVATE dl ${XercesC_LIBRARIES})
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     target_compile_options(interp PRIVATE
