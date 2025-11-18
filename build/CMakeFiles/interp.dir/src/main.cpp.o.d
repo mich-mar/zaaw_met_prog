@@ -148,7 +148,6 @@ CMakeFiles/interp.dir/src/main.cpp.o: \
  /usr/include/c++/11/bits/istream.tcc /usr/include/dlfcn.h \
  /usr/include/x86_64-linux-gnu/bits/dlfcn.h \
  /usr/include/x86_64-linux-gnu/bits/dl_find_object.h \
- /usr/include/c++/11/cassert /usr/include/assert.h \
  /usr/include/c++/11/sstream /usr/include/c++/11/bits/sstream.tcc \
  /usr/include/c++/11/fstream /usr/include/c++/11/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
@@ -162,10 +161,11 @@ CMakeFiles/interp.dir/src/main.cpp.o: \
  /usr/include/c++/11/array /usr/include/c++/11/bits/uses_allocator.h \
  /usr/include/c++/11/bits/invoke.h \
  /usr/include/c++/11/bits/stl_multimap.h \
- /usr/include/c++/11/bits/erase_if.h /usr/include/c++/11/list \
- /usr/include/c++/11/bits/stl_list.h \
- /usr/include/c++/11/bits/allocated_ptr.h \
- /usr/include/c++/11/bits/list.tcc \
+ /usr/include/c++/11/bits/erase_if.h /usr/include/c++/11/vector \
+ /usr/include/c++/11/bits/stl_uninitialized.h \
+ /usr/include/c++/11/bits/stl_vector.h \
+ /usr/include/c++/11/bits/stl_bvector.h \
+ /usr/include/c++/11/bits/vector.tcc \
  /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/AbstractInterp4Command.hh \
  /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/AbstractScene.hh \
  /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/AbstractMobileObj.hh \
@@ -193,15 +193,33 @@ CMakeFiles/interp.dir/src/main.cpp.o: \
  /usr/include/c++/11/tr1/modified_bessel_func.tcc \
  /usr/include/c++/11/tr1/poly_hermite.tcc \
  /usr/include/c++/11/tr1/poly_laguerre.tcc \
- /usr/include/c++/11/tr1/riemann_zeta.tcc \
+ /usr/include/c++/11/tr1/riemann_zeta.tcc /usr/include/c++/11/cassert \
+ /usr/include/assert.h \
  /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/AbstractComChannel.hh \
  /usr/include/c++/11/mutex /usr/include/c++/11/chrono \
  /usr/include/c++/11/ratio /usr/include/c++/11/ctime \
  /usr/include/c++/11/bits/parse_numbers.h \
  /usr/include/c++/11/bits/std_mutex.h \
  /usr/include/c++/11/bits/unique_lock.h \
+ /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/AbstractMobileObj.hh \
+ /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/Cuboid.hh \
  /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/preprocesor.hh \
  /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/Configuration.hh \
+ /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/Scene.hh \
+ /usr/include/c++/11/memory /usr/include/c++/11/bits/stl_tempbuf.h \
+ /usr/include/c++/11/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/11/bits/align.h /usr/include/c++/11/bit \
+ /usr/include/c++/11/bits/unique_ptr.h \
+ /usr/include/c++/11/bits/shared_ptr.h \
+ /usr/include/c++/11/bits/shared_ptr_base.h \
+ /usr/include/c++/11/bits/allocated_ptr.h \
+ /usr/include/c++/11/bits/refwrap.h /usr/include/c++/11/ext/concurrence.h \
+ /usr/include/c++/11/bits/shared_ptr_atomic.h \
+ /usr/include/c++/11/bits/atomic_base.h \
+ /usr/include/c++/11/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/11/backward/auto_ptr.h \
+ /usr/include/c++/11/pstl/glue_memory_defs.h \
+ /usr/include/c++/11/pstl/execution_defs.h \
  /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/xmlinterp.hh \
  /usr/include/xercesc/util/XMLString.hpp \
  /usr/include/xercesc/util/BaseRefVectorOf.hpp \
@@ -234,4 +252,5 @@ CMakeFiles/interp.dir/src/main.cpp.o: \
  /usr/include/xercesc/sax/ErrorHandler.hpp \
  /usr/include/xercesc/sax/SAXParseException.hpp \
  /usr/include/xercesc/sax/SAXException.hpp \
- /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/Configuration.hh
+ /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/Configuration.hh \
+ /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/ComChannel.hh

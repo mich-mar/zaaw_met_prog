@@ -220,6 +220,30 @@ Interp4Set/fast:
 	$(MAKE) $(MAKESILENT) -f plugin/CMakeFiles/Interp4Set.dir/build.make plugin/CMakeFiles/Interp4Set.dir/build
 .PHONY : Interp4Set/fast
 
+src/ComChannel.o: src/ComChannel.cpp.o
+.PHONY : src/ComChannel.o
+
+# target to build an object file
+src/ComChannel.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/interp.dir/build.make CMakeFiles/interp.dir/src/ComChannel.cpp.o
+.PHONY : src/ComChannel.cpp.o
+
+src/ComChannel.i: src/ComChannel.cpp.i
+.PHONY : src/ComChannel.i
+
+# target to preprocess a source file
+src/ComChannel.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/interp.dir/build.make CMakeFiles/interp.dir/src/ComChannel.cpp.i
+.PHONY : src/ComChannel.cpp.i
+
+src/ComChannel.s: src/ComChannel.cpp.s
+.PHONY : src/ComChannel.s
+
+# target to generate assembly for a file
+src/ComChannel.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/interp.dir/build.make CMakeFiles/interp.dir/src/ComChannel.cpp.s
+.PHONY : src/ComChannel.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -308,6 +332,9 @@ help:
 	@echo "... Interp4Rotate"
 	@echo "... Interp4Set"
 	@echo "... interp"
+	@echo "... src/ComChannel.o"
+	@echo "... src/ComChannel.i"
+	@echo "... src/ComChannel.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

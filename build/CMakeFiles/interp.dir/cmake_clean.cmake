@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/interp.dir/src/ComChannel.cpp.o"
+  "CMakeFiles/interp.dir/src/ComChannel.cpp.o.d"
   "CMakeFiles/interp.dir/src/main.cpp.o"
   "CMakeFiles/interp.dir/src/main.cpp.o.d"
   "CMakeFiles/interp.dir/src/preprocesor.cpp.o"

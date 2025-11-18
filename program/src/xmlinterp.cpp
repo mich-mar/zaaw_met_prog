@@ -10,9 +10,17 @@
 #include <iostream>
 #include <cstring>  
 #include <stdexcept>
+#include "Cuboid.hh"
 
 // Użycie przestrzeni nazw Xerces jest dozwolone
 XERCES_CPP_NAMESPACE_USE 
+
+Vector3D ParseXMLVector(const char* sValue) {
+    std::istringstream IStrm(sValue);
+    Vector3D Vec;
+    IStrm >> Vec[0] >> Vec[1] >> Vec[2];
+    return Vec;
+}
 
 /**
  * @brief Główna funkcja uruchamiająca parser XML (silnik).
@@ -109,7 +117,6 @@ void XMLInterp4Config::endDocument()
   std::cout << "--- Koniec przetwarzania dokumentu XML." << std::endl;
 }
 
-
 /**
  * @brief Analizuje atrybuty elementu XML "Lib".
  *
@@ -152,52 +159,54 @@ void XMLInterp4Config::ProcessLibAttrs(const xercesc::Attributes  &rAttrs)
  *
  * @param rAttrs Atrybuty przekazane przez parser dla elementu "Cube".
  */
-void XMLInterp4Config::ProcessCubeAttrs(const xercesc::Attributes  &rAttrs)
+void XMLInterp4Config::ProcessCubeAttrs(const xercesc::Attributes &rAttrs)
 {
- // TODO: Walidacja atrybutów 'Cube' powinna być bardziej elastyczna
- if (rAttrs.getLength() < 1) {
-      std::cerr << "Zła ilość atrybutów dla \"Cube\"" << std::endl;
-      std::exit(1);
- }
+    if (rAttrs.getLength() < 1) {
+        std::cerr << "Zła ilość atrybutów dla \"Cube\"" << std::endl;
+        return; // lub exit
+    }
 
- char* sName_Name = xercesc::XMLString::transcode(rAttrs.getQName(0));
- char* sName_Scale = xercesc::XMLString::transcode(rAttrs.getQName(1));
- char* sName_RGB = xercesc::XMLString::transcode(rAttrs.getQName(2));
+    Cuboid *pObj = new Cuboid(); // Tworzymy nowy prostopadłościan
 
- XMLSize_t  Index = 0;
- char* sValue_Name    = xercesc::XMLString::transcode(rAttrs.getValue(Index));
- char* sValue_Scale = xercesc::XMLString::transcode(rAttrs.getValue(1));
- char* sValue_RGB     = xercesc::XMLString::transcode(rAttrs.getValue(2));
+    // Pętla po wszystkich atrybutach elementu <Cube ...>
+    for (XMLSize_t i = 0; i < rAttrs.getLength(); i++) {
+        char* sAttrName = xercesc::XMLString::transcode(rAttrs.getQName(i));
+        char* sAttrValue = xercesc::XMLString::transcode(rAttrs.getValue(i));
+        
+        std::string strName = sAttrName; // Konwersja na string dla łatwiejszego porównania
 
- std::cout << " Atrybuty:" << std::endl
-      << "     " << sName_Name << " = \"" << sValue_Name << "\"" << std::endl
-      << "     " << sName_Scale << " = \"" << sValue_Scale << "\"" << std::endl
-      << "     " << sName_RGB << " = \"" << sValue_RGB << "\"" << std::endl   
-      << std::endl; 
- 
- std::istringstream   IStrm; // Użycie std::istringstream
- 
- IStrm.str(sValue_Scale);
- double  Sx,Sy,Sz;
+        if (strName == "Name") {
+            pObj->SetName(sAttrValue);
+        } 
+        else if (strName == "Shift") {
+            pObj->SetShift(ParseXMLVector(sAttrValue));
+        } 
+        else if (strName == "Scale") {
+            pObj->SetScale(ParseXMLVector(sAttrValue));
+        } 
+        else if (strName == "RotXYZ_deg") {
+            Vector3D Ang = ParseXMLVector(sAttrValue);
+            pObj->SetAng_Roll_deg(Ang[0]);
+            pObj->SetAng_Pitch_deg(Ang[1]);
+            pObj->SetAng_Yaw_deg(Ang[2]);
+        } 
+        else if (strName == "Trans_m") {
+            pObj->SetPosition_m(ParseXMLVector(sAttrValue));
+        } 
+        else if (strName == "RGB") {
+            pObj->SetColor(ParseXMLVector(sAttrValue));
+        }
 
- IStrm >> Sx >> Sy >> Sz;
- if (IStrm.fail()) {
-     std::cerr << " Błąd parsowania wartości 'Scale'!" << std::endl;
- } else {
-     std::cout << " Odczytano wartości 'Scale':" << std::endl;
-     std::cout << "     " << Sx << "  " << Sy << "  " << Sz << std::endl;
- }
+        // Pamiętaj o zwolnieniu pamięci po transcode!
+        xercesc::XMLString::release(&sAttrName);
+        xercesc::XMLString::release(&sAttrValue);
+    }
 
- // TODO: Dodać logikę przetwarzania wczytanych atrybutów (np. tworzenie obiektu 'Cube').
-
- xercesc::XMLString::release(&sName_Name);
- xercesc::XMLString::release(&sName_Scale);
- xercesc::XMLString::release(&sName_RGB);
- xercesc::XMLString::release(&sValue_Name);
- xercesc::XMLString::release(&sValue_Scale);
- xercesc::XMLString::release(&sValue_RGB);
+    // Dodajemy wypełniony obiekt do sceny znajdującej się w konfiguracji
+    _Config.GetScene().AddMobileObj(pObj);
+    
+    std::cout << "  Dodano obiekt do sceny: " << pObj->GetName() << std::endl;
 }
-
 
 /**
  * @brief Wykonuje operacje związane z wystąpieniem danego elementu XML.

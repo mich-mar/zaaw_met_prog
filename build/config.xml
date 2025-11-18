@@ -1,17 +1,53 @@
-  <Config>
-   <Plugins>
+<Config>
+  <Plugins>
     <Lib Name="plugin/libInterp4Move.so"/>
     <Lib Name="plugin/libInterp4Rotate.so"/>
     <Lib Name="plugin/libInterp4Pause.so"/>
     <Lib Name="plugin/libInterp4Set.so"/>
-   </Plugins>
-   <Objects>
-     <Cube Name="Podstawa" Shift="0 -0.5 0" Scale="0.7 0.7 0.2"
-                 RotXYZ_deg="10 0 0" Trans_m="0.1 0 0" RGB="0 0 255"/>
-     <Cube Name="Podstawa.Ramie1" Shift="0 -0.5 0" Scale="0.1 0.1 0.6"
-	                                                 Trans_m="0 0.7 0"/>
-     <Cube Name="Podstawa.Ramie1.Ramie2" Shift="0 -0.5 0"
-	         Scale="0.1 0.1 0.6" Trans_m="0 0.7 0"/>
-   </Objects>
-  </Config>
-  
+  </Plugins>
+
+  <Objects>
+
+    <!-- KORPUS (brązowy) -->
+    <Cube Name="Jamnik" Shift="0 -0.5 0"
+          Scale="1.6 0.4 0.3"
+          Trans_m="0 0 0" RGB="150 75 0"/>
+
+    <!-- GŁOWA -->
+    <Cube Name="Jamnik.Glowa" Shift="0 -0.5 0"
+          Scale="0.5 0.4 0.4"
+          Trans_m="0.9 0 0"
+          RGB="150 75 0"/>
+
+    <!-- OGON -->
+    <Cube Name="Jamnik.Ogon" Shift="0 0 0"
+          Scale="0.9 0.2 0.2"
+          Trans_m="-1.0 0 0"
+          RGB="120 60 0"/>
+
+    <!-- LEWA PRZEDNIA ŁAPA -->
+    <Cube Name="Jamnik.LapaLF" Shift="0 -0.5 0"
+          Scale="0.15 0.3 0.15"
+          Trans_m="0.5 0.3 0"
+          RGB="100 50 0"/>
+
+    <!-- PRAWA PRZEDNIA ŁAPA -->
+    <Cube Name="Jamnik.LapaRF" Shift="0 -0.5 0"
+          Scale="0.15 0.15 0.4"
+          Trans_m="0.5 -0.3 0"
+          RGB="100 50 0"/>
+
+    <!-- LEWA TYLNA ŁAPA -->
+    <Cube Name="Jamnik.LapaLB" Shift="0 -0.5 0"
+          Scale="0.15 0.15 0.4"
+          Trans_m="-0.5 0.3 0"
+          RGB="100 50 0"/>
+
+    <!-- PRAWA TYLNA ŁAPA -->
+    <Cube Name="Jamnik.LapaRB" Shift="0 -0.5 0"
+          Scale="0.15 0.15 0.4"
+          Trans_m="-0.5 -0.3 0"
+          RGB="100 50 0"/>
+
+  </Objects>
+</Config>

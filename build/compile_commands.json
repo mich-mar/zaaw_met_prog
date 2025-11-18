@@ -15,6 +15,11 @@
   "file": "/home/michal/Documents/studia/sem_7/zaaw_met_prog/program/src/xmlinterp.cpp"
 },
 {
+  "directory": "/home/michal/Documents/studia/sem_7/zaaw_met_prog/build",
+  "command": "/usr/bin/c++  -I/home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc  -g -O0 -g -Wall -Wextra -Wpedantic -Wshadow -Wformat=2 -Wunused -Wnull-dereference -Wconversion -Wno-unused-parameter -std=gnu++17 -o CMakeFiles/interp.dir/src/ComChannel.cpp.o -c /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/src/ComChannel.cpp",
+  "file": "/home/michal/Documents/studia/sem_7/zaaw_met_prog/program/src/ComChannel.cpp"
+},
+{
   "directory": "/home/michal/Documents/studia/sem_7/zaaw_met_prog/build/plugin",
   "command": "/usr/bin/c++ -DInterp4Move_EXPORTS -I/home/michal/Documents/studia/sem_7/zaaw_met_prog/program/plugin/inc -I/home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc  -g -O0 -g -fPIC -fPIC -Wall -Wextra -Wpedantic -Wshadow -Wformat=2 -Wunused -Wnull-dereference -Wconversion -Wno-unused-parameter -std=gnu++17 -o CMakeFiles/Interp4Move.dir/src/Interp4Move.cpp.o -c /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/plugin/src/Interp4Move.cpp",
   "file": "/home/michal/Documents/studia/sem_7/zaaw_met_prog/program/plugin/src/Interp4Move.cpp"

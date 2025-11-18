@@ -2,7 +2,8 @@
 #define CONFIGURATION_HH
 
 #include <string>
-#include <list>  
+#include <vector>
+#include "Scene.hh"
 
 /**
  * @brief Przechowuje konfigurację wczytaną z zewnętrznego źródła (np. pliku XML).
@@ -10,35 +11,29 @@
 class Configuration {
 private:
     /**
-     * @brief Lista przechowująca nazwy bibliotek (np. "libInterp4Command.so").
+     * @brief Wektor przechowujący nazwy bibliotek.
      */
-    std::list<std::string> _libraries;
+    std::vector<std::string> _libraries;
 
-    // TODO: Przewidziane miejsce na mapę obiektów sceny do wczytania
-    // W przyszłości: std::map<std::string, SceneObject> _objects;
+    /**
+     * @brief Obiekt sceny przechowujący obiekty mobilne.
+     */
+    Scene _Scene;              
 
 public:
-    /**
-     * @brief Konstruktor domyślny.
-     */
     Configuration() = default;
 
-    /**
-     * @brief Dodaje nazwę biblioteki do wewnętrznej listy konfiguracji.
-     *
-     * @param libName - Nazwa biblioteki (np. z pliku .so) do dodania.
-     */
     void AddLibrary(const std::string& libName) {
         _libraries.push_back(libName);
     }
 
+    Scene& GetScene() { return _Scene; }
+
     /**
-     * @brief Kopiuje listę bibliotek do obiektu docelowego.
-     *
-     * @param[out] rLibList - Referencja do listy, która zostanie wypełniona nazwami bibliotek.
+     * @brief Kopiuje wektor bibliotek do wektora wyjściowego.
      */
-    void GetLibraries(std::list<std::string>& rLibList) const {
-        rLibList = _libraries; // Kopiowanie zawartości listy
+    void GetLibraries(std::vector<std::string>& rLibList) const {
+        rLibList = _libraries;
     }
 };
 

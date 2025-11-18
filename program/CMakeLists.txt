@@ -20,10 +20,12 @@ add_subdirectory(plugin)
 
 add_executable(interp src/main.cpp 
                 src/preprocesor.cpp
-                src/xmlinterp.cpp)
+                src/xmlinterp.cpp
+                src/ComChannel.cpp
+                )
 
 # Kopiuje plik .spr do katalogu 'build', aby był dostępny dla programu 'interp'
-configure_file(test_preproc.spr test_preproc.spr COPYONLY)
+configure_file(skrypt.spr skrypt.spr COPYONLY)
 
 # Kopiuje plik config.xml do katalogu 'build'
 configure_file(config.xml config.xml COPYONLY)

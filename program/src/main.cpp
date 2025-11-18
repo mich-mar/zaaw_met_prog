@@ -1,228 +1,190 @@
 /*!
- * @brief Główny plik wykonywalny interpretera poleceń.
+ * @brief Główny plik wykonywalny interpretera poleceń (wersja uproszczona).
  *
- * Program realizuje logikę interpretera, który jest dynamicznie
- * konfigurowany przy starcie. Główne zadania:
- *
- * > Konfiguracja XML: Wczytuje `config.xml` (używając Xerces-C),
- * aby pobrać listę wtyczek do załadowania.
- *
- * > Ładowanie Wtyczek: Dynamicznie ładuje biblioteki `.so`
- * (przez `dlopen`) i buduje mapę poleceń (np. "Move" -> funkcja).
- *
- * > Przetwarzanie Skryptu: Wczytuje plik skryptu
- * i przetwarza go przez preprocesor C (`cpp -P`), aby
- * rozwinąć makra i usunąć komentarze.
- *
- * > Interpretacja Poleceń: Czyta czysty skrypt linia po linii,
- * tworzy obiekty poleceń z mapy i wywołuje `ReadParams`,
- * aby wczytać ich argumenty.
+ * Program wykonuje pięć głównych kroków:
+ * 1. Wczytanie konfiguracji z pliku XML.
+ * 2. Połączenie z serwerem i zainicjalizowanie sceny.
+ * 3. Załadowanie wtyczek (komend) jako bibliotek .so.
+ * 4. Wykonanie skryptu poleceń przetworzonego przez preprocesor.
+ * 5. Sprzątanie i zakończenie działania.
  */
 
 #include <iostream>
-#include <dlfcn.h>    
-#include <cassert>
+#include <dlfcn.h>
 #include <string>
 #include <sstream>
-#include <cstdio>
-#include <stdexcept>
 #include <fstream>
-#include <map>        
-#include <list>         
+#include <map>
+#include <vector>
 
 #include "AbstractInterp4Command.hh"
-#include "preprocesor.hh" 
+#include "AbstractMobileObj.hh"
+#include "Cuboid.hh"     
+#include "preprocesor.hh"
 #include "Configuration.hh"
 #include "xmlinterp.hh"
+#include "ComChannel.hh"
 
-/**
- * @brief Definicja typu wskaźnika na funkcję tworzącą polecenie.
- * Każda wtyczka musi udostępniać funkcję tego typu (np. "CreateCmd").
- */
 using Fun_CreateCmd = AbstractInterp4Command* (*)(void);
-
-/**
- * @brief Definicja typu wskaźnika na funkcję zwracającą nazwę polecenia.
- * Każda wtyczka musi udostępniać funkcję tego typu (np. "GetCmdName").
- */
 using Fun_GetCmdName = const char* (*)(void);
 
 /**
- * @brief Główna funkcja programu.
+ * @brief Konwertuje wektor 3D na format (x,y,z) zgodny z serwerem.
  */
+std::string Vec2Str(const Vector3D& vec) {
+    std::stringstream ss;
+    ss << "(" << vec[0] << "," << vec[1] << "," << vec[2] << ")";
+    return ss.str();
+}
+
 int main()
 {
-  // ------------------------------------------------------------------
-  // 1. Wczytanie konfiguracji XML
-  // ------------------------------------------------------------------
-  
-  /**
-   * @brief Obiekt przechowujący konfigurację wczytaną z XML.
-   * Zawiera m.in. listę bibliotek (wtyczek) do załadowania.
-   */
-  Configuration config; 
-  
-  std::cout << "--- WCZYTYWANIE KONFIGURACJI (config.xml) ---" << std::endl;
-  try {
-    // Wywołujemy funkcję ReadXML z xmlinterp.hh
-    if (!ReadXML("config.xml", config)) { 
-      std::cerr << "!!! BŁĄD: Nie udało się wczytać 'config.xml'" << std::endl;
-      return 1;
-    }
-  }
-  catch (const std::runtime_error& e) {
-    std::cerr << "!!! Błąd wykonania parsera XML: " << e.what() << std::endl;
-    return 1;
-  }
+    // ================================================================
+    // 1. Wczytanie konfiguracji XML
+    // ================================================================
+    Configuration config;
 
-  // ------------------------------------------------------------------
-  // 2. Definicja struktur danych interpretera
-  // ------------------------------------------------------------------
-
-  /**
-   * @brief Mapa poleceń.
-   * Kluczem jest nazwa polecenia (np. "Begin"), wartością jest wskaźnik
-   * na funkcję tworzącą obiekt danej komendy (pobraną z wtyczki).
-   */
-  std::map<std::string, Fun_CreateCmd> commandMap;
-  
-  /**
-   * @brief Lista uchwytów do załadowanych bibliotek dynamicznych.
-   * Przechowywana, aby można było je poprawnie zamknąć na końcu programu.
-   */
-  std::list<void*> libraryHandles;
-
-  // Pobierz listę bibliotek z obiektu Konfiguracji
-  std::list<std::string> libraryNames;
-  // Używamy funkcji GetLibraries z Configuration.hh
-  config.GetLibraries(libraryNames); 
-
-  std::cout << "--- ŁADOWANIE WTYCZEK (z config) ---" << std::endl;
-
-  // ------------------------------------------------------------------
-  // 3. Pętla ładowania wtyczek
-  // ------------------------------------------------------------------
-  
-  /**
-   * @brief Pętla iteruje po nazwach bibliotek pobranych z konfiguracji.
-   */
-  for (const std::string& libraryName : libraryNames) {
-    void* pLibraryHandle = dlopen(libraryName.c_str(), RTLD_LAZY);
-
-    if (!pLibraryHandle) {
-      std::cerr << "!!! BŁĄD: Nie można otworzyć biblioteki: " << libraryName << std::endl;
-      std::cerr << "!!!   " << dlerror() << std::endl;
-      continue; 
+    std::cout << "--- WCZYTYWANIE KONFIGURACJI ---\n";
+    if (!ReadXML("config.xml", config)) {
+        return 1;   // krytyczny błąd – przerwij program
     }
 
-    // Pobranie funkcji GetCmdName
-    void* pFun_GetCmdName = dlsym(pLibraryHandle, "GetCmdName");
-    if (!pFun_GetCmdName) {
-      std::cerr << "!!! BŁĄD: Nie znaleziono funkcji GetCmdName w " << libraryName << std::endl;
-      dlclose(pLibraryHandle);
-      continue;
-    }
-    Fun_GetCmdName GetName = reinterpret_cast<Fun_GetCmdName>(pFun_GetCmdName);
+    // ================================================================
+    // 2. Połączenie z serwerem i przygotowanie sceny
+    // ================================================================
+    std::cout << "--- POLACZENIE Z SERWEREM ---\n";
+    ComChannel channel;
 
-    // Pobranie funkcji CreateCmd
-    void* pFun_CreateCmd = dlsym(pLibraryHandle, "CreateCmd");
-    if (!pFun_CreateCmd) {
-      std::cerr << "!!! BŁĄD: Nie znaleziono funkcji CreateCmd w " << libraryName << std::endl;
-      dlclose(pLibraryHandle);
-      continue;
-    }
-    Fun_CreateCmd CreateCommand = reinterpret_cast<Fun_CreateCmd>(pFun_CreateCmd);
-
-    // Dodanie polecenia do mapy
-    std::string commandName = GetName();
-    commandMap[commandName] = CreateCommand;
-    
-    libraryHandles.push_back(pLibraryHandle); // Zapisanie uchwytu do zamknięcia
-    std::cout << "  Załadowano polecenie: " << commandName << std::endl;
-  }
-
-  // ------------------------------------------------------------------
-  // 4. Uruchomienie preprocesora
-  // ------------------------------------------------------------------
-  
-  std::cout << "\n--- URUCHAMIANIE PREPROCESORA ---" << std::endl;
-  
-  const char* testFilename = "test_preproc.spr";
-  
-  /**
-   * @brief Strumień (w pamięci) przechowujący kod po przetworzeniu 
-   * przez preprocesor. Ten strumień będzie wejściem dla pętli 
-   * interpretera.
-   */
-  std::stringstream commandStream; 
-  
-  std::ifstream testFile(testFilename);
-  if (!testFile) {
-      std::cerr << "!!! BŁĄD: Nie znaleziono pliku testowego '" << testFilename << "'" << std::endl;
-  } else {
-      testFile.close();
-      try {
-          std::string result = runPreprocesor(testFilename); 
-          std::cout << "--- Zawartość " << testFilename << " po preprocesorze ---" << std::endl;
-          std::cout << result;
-          std::cout << "-----------------------------------------------" << std::endl;
-          
-          // Zapisanie wyniku preprocesora do strumienia poleceń
-          commandStream.str(result);
-      } catch (const std::runtime_error& e) {
-          std::cerr << "!!! Błąd podczas testu preprocesora: " << e.what() << std::endl;
-      }
-  }
-
-  // ------------------------------------------------------------------
-  // 5. Pętla interpretera poleceń
-  // ------------------------------------------------------------------
-  
-  std::cout << "\n--- URUCHAMIANIE INTERPRETERA ---" << std::endl;
-  std::string commandName;
-
-  /**
-   * @brief Główna pętla interpretera.
-   */
-  while (commandStream >> commandName) {
-    auto commandIter = commandMap.find(commandName);
-
-    // Obsługa nieznanego polecenia
-    if (commandIter == commandMap.end()) {
-      std::cerr << "!!! BŁĄD: Nierozpoznane polecenie: " << commandName << std::endl;
-      std::string restOfLine;
-      std::getline(commandStream, restOfLine); // Pomiń resztę linii
-      continue;
+    if (!channel.InitConnection(6217)) {
+        std::cerr << "!!! Blad polaczenia z serwerem\n";
+        return 1;
     }
 
-    // Utworzenie obiektu polecenia
-    Fun_CreateCmd pCreateCommand = commandIter->second;
-    AbstractInterp4Command *pCommand = pCreateCommand();
+    // Czyścimy scenę po stronie serwera
+    channel.Send("Clear\n");
 
-    std::cout << "\n> Wykonywanie polecenia: " << pCommand->GetCmdName() << std::endl;
+    // Wysyłamy wszystkie obiekty z konfiguracji do serwera
+    Scene& scene = config.GetScene();
+    for (auto& [name, objPtr] : scene.GetObjects()) {
 
-    // Wczytanie parametrów i wykonanie
-    if (!pCommand->ReadParams(commandStream)) {
-      std::cerr << "!!! BŁĄD: Niepoprawne parametry dla polecenia: " << commandName << std::endl;
-      pCommand->PrintSyntax(); 
-    } else {
-      pCommand->PrintCmd();
+        // Każdy obiekt w XML to Cuboid – upewniamy się, że tak jest
+        if (auto* cub = dynamic_cast<Cuboid*>(objPtr.get())) {
+
+            // Tworzymy komendę AddObj zgodną z formatem serwera
+            std::stringstream cmd;
+            cmd << "AddObj Name=" << cub->GetName()
+                << " RGB="      << Vec2Str(cub->GetColor())
+                << " Scale="    << Vec2Str(cub->GetScale())
+                << " Shift="    << Vec2Str(cub->GetShift())
+                << " Trans_m="  << Vec2Str(cub->GetPositoin_m())
+                << " RotXYZ_deg=("
+                << cub->GetAng_Roll_deg()  << ","
+                << cub->GetAng_Pitch_deg() << ","
+                << cub->GetAng_Yaw_deg()   << ")\n";
+
+            std::cout << " Wysylanie: " << cmd.str();
+            channel.Send(cmd.str().c_str());
+
+        } else {
+            std::cerr << "!!! Obiekt '" << objPtr->GetName()
+                      << "' nie jest typu Cuboid!\n";
+        }
     }
-    
-    delete pCommand; // Zwolnienie pamięci
-  }
 
-  // ------------------------------------------------------------------
-  // 6. Zamykanie bibliotek
-  // ------------------------------------------------------------------
-  
-  /**
-   * @brief Sprzątanie - zwalnianie uchwytów do bibliotek dynamicznych.
-   */
-  std::cout << "\n--- ZAMYKANIE BIBLIOTEK ---" << std::endl;
-  for (void* pLibraryHandle : libraryHandles) {
-    dlclose(pLibraryHandle);
-  }
+    // ================================================================
+    // 3. Ładowanie wtyczek (bibliotek .so)
+    // ================================================================
+    std::cout << "\n--- LADOWANIE WTYCZEK ---\n";
 
-  return 0;
+    std::map<std::string, Fun_CreateCmd> pluginCommands; // komendy: nazwa → CreateCmd()
+    std::vector<void*> pluginHandles;                    // uchwyty dlopen()
+
+    std::vector<std::string> libraries;
+    config.GetLibraries(libraries);
+
+    for (const std::string& lib : libraries) {
+
+        // Próba załadowania biblioteki
+        void* handle = dlopen(lib.c_str(), RTLD_LAZY);
+        if (!handle) {
+            std::cerr << "!!! Blad dlopen: " << dlerror() << "\n";
+            continue;
+        }
+
+        // Pobieramy funkcje z biblioteki
+        auto getName = reinterpret_cast<Fun_GetCmdName>(dlsym(handle, "GetCmdName"));
+        auto create  = reinterpret_cast<Fun_CreateCmd>(dlsym(handle, "CreateCmd"));
+
+        if (!getName || !create) {
+            std::cerr << "!!! Wtyczka nie posiada wymaganych funkcji (" << lib << ")\n";
+            dlclose(handle);
+            continue;
+        }
+
+        // Rejestrujemy komendę
+        std::string cmdName = getName();
+        pluginCommands[cmdName] = create;
+        pluginHandles.push_back(handle);
+
+        std::cout << "  Zaladowano: " << cmdName << "\n";
+    }
+
+    // ================================================================
+    // 4. Przetwarzanie skryptu (po preprocesorze)
+    // ================================================================
+    std::cout << "\n--- PRZETWARZANIE SKRYPTU ---\n";
+
+    const char* script = "skrypt.spr";
+
+    // Sprawdzamy czy plik istnieje
+    if (!std::ifstream(script)) {
+        std::cerr << "!!! Brak pliku: " << script << "\n";
+    } 
+    else 
+    {
+        // Uruchamiamy preprocesor (obsługuje m.in. #include)
+        std::string preprocOutput = runPreprocesor(script);
+        std::stringstream ss(preprocOutput);
+
+        std::string cmdName;
+        while (ss >> cmdName) {
+
+            // Sprawdzamy czy komenda istnieje
+            if (!pluginCommands.count(cmdName)) {
+                std::cerr << "!!! Nieznane polecenie: " << cmdName << "\n";
+                std::string dummy; 
+                std::getline(ss, dummy); // pomijamy resztę linii
+                continue;
+            }
+
+            // Tworzymy obiekt komendy
+            auto* cmd = pluginCommands[cmdName]();
+
+            // Wczytanie parametrów
+            if (cmd->ReadParams(ss)) {
+                std::cout << " Wykonuje: ";
+                cmd->PrintCmd();
+                // TU w kolejnych etapach wywołanie: cmd->ExecCmd(...)
+            } 
+            else {
+                std::cerr << "!!! Blad parametrow polecenia\n";
+            }
+
+            delete cmd;
+        }
+    }
+
+    // ================================================================
+    // 5. Sprzątanie
+    // ================================================================
+    std::cout << "\n--- KONCZENIE PRACY ---\n";
+
+    channel.Send("Close\n");   // zamknięcie sesji z serwerem
+
+    // Zwalniamy biblioteki dynamiczne
+    for (void* h : pluginHandles) {
+        dlclose(h);
+    }
+
+    return 0;
 }
