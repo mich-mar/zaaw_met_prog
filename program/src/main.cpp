@@ -96,7 +96,7 @@ int main()
     // ================================================================
     std::cout << "\n--- LADOWANIE WTYCZEK ---\n";
 
-    std::map<std::string, Fun_CreateCmd> pluginCommands; // komendy: nazwa → CreateCmd()
+    std::map<std::string, Fun_CreateCmd> pluginCommands; // komendy: nazwa -> CreateCmd()
     std::vector<void*> pluginHandles;                    // uchwyty dlopen()
 
     std::vector<std::string> libraries;
@@ -112,8 +112,8 @@ int main()
         }
 
         // Pobieramy funkcje z biblioteki
-        auto getName = reinterpret_cast<Fun_GetCmdName>(dlsym(handle, "GetCmdName"));
-        auto create  = reinterpret_cast<Fun_CreateCmd>(dlsym(handle, "CreateCmd"));
+        Fun_GetCmdName getName = reinterpret_cast<Fun_GetCmdName>(dlsym(handle, "GetCmdName"));
+        Fun_CreateCmd create  = reinterpret_cast<Fun_CreateCmd>(dlsym(handle, "CreateCmd"));
 
         if (!getName || !create) {
             std::cerr << "!!! Wtyczka nie posiada wymaganych funkcji (" << lib << ")\n";
@@ -158,7 +158,7 @@ int main()
             }
 
             // Tworzymy obiekt komendy
-            auto* cmd = pluginCommands[cmdName]();
+            AbstractInterp4Command* cmd = pluginCommands[cmdName]();
 
             // Wczytanie parametrów
             if (cmd->ReadParams(ss)) {

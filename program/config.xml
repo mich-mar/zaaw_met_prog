@@ -8,46 +8,47 @@
 
   <Objects>
 
-    <!-- KORPUS (brązowy) -->
-    <Cube Name="Jamnik" Shift="0 -0.5 0"
-          Scale="1.6 0.4 0.3"
-          Trans_m="0 0 0" RGB="150 75 0"/>
+    <Cube Name="base_link"
+          Shift="0 0 0"
+          Scale="0.06 0.012 0.012"
+          Trans_m="0 0 0"
+          RGB="150 150 150"/>
 
-    <!-- GŁOWA -->
-    <Cube Name="Jamnik.Glowa" Shift="0 -0.5 0"
-          Scale="0.5 0.4 0.4"
-          Trans_m="0.9 0 0"
-          RGB="150 75 0"/>
+    <Cube Name="link_1_1"
+          Shift="0 0 0"
+          Scale="0.0157 0.0031 0.0031"
+          Trans_m="-0.002447 -0.063 -0.001614"
+          RGB="150 150 150"/>
 
-    <!-- OGON -->
-    <Cube Name="Jamnik.Ogon" Shift="0 0 0"
-          Scale="0.9 0.2 0.2"
-          Trans_m="-1.0 0 0"
-          RGB="120 60 0"/>
+    <Cube Name="link_2_1"
+          Shift="0 0 0"
+          Scale="0.1745 0.0349 0.0349"
+          Trans_m="-0.002253 -0.078512 -0.004446"
+          RGB="150 150 150"/>
 
-    <!-- LEWA PRZEDNIA ŁAPA -->
-    <Cube Name="Jamnik.LapaLF" Shift="0 -0.5 0"
-          Scale="0.15 0.3 0.15"
-          Trans_m="0.5 0.3 0"
-          RGB="100 50 0"/>
+    <Cube Name="link_3_1"
+          Shift="0 0 0"
+          Scale="0.0642 0.0128 0.0128"
+          Trans_m="0.050046 -0.244073 -0.034207"
+          RGB="150 150 150"/>
 
-    <!-- PRAWA PRZEDNIA ŁAPA -->
-    <Cube Name="Jamnik.LapaRF" Shift="0 -0.5 0"
-          Scale="0.15 0.15 0.4"
-          Trans_m="0.5 -0.3 0"
-          RGB="100 50 0"/>
+    <Cube Name="link_4_1"
+          Shift="0 0 0"
+          Scale="0.1567 0.0313 0.0313"
+          Trans_m="0.07012 -0.305037 0.001482"
+          RGB="150 150 150"/>
 
-    <!-- LEWA TYLNA ŁAPA -->
-    <Cube Name="Jamnik.LapaLB" Shift="0 -0.5 0"
-          Scale="0.15 0.15 0.4"
-          Trans_m="-0.5 0.3 0"
-          RGB="100 50 0"/>
+    <Cube Name="link_5_1"
+          Shift="0 0 0"
+          Scale="0.1292 0.0258 0.0258"
+          Trans_m="0.174242 -0.19174 -0.050084"
+          RGB="150 150 150"/>
 
-    <!-- PRAWA TYLNA ŁAPA -->
-    <Cube Name="Jamnik.LapaRB" Shift="0 -0.5 0"
-          Scale="0.15 0.15 0.4"
-          Trans_m="-0.5 -0.3 0"
-          RGB="100 50 0"/>
+    <Cube Name="efector_1"
+          Shift="0 0 0"
+          Scale="0.05 0.02 0.02"
+          Trans_m="0.162881 -0.305491 0.006983"
+          RGB="180 180 180"/>
 
   </Objects>
 </Config>
