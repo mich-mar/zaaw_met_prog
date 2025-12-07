@@ -190,7 +190,7 @@ int main(int argc, char** argv)
         std::cout << "  Zaladowano: " << cmdName << "\n";
     }
 
-        // ================================================================
+    // ================================================================
     // 4. Przetwarzanie skryptu (po preprocesorze) + akcje równoległe
     // ================================================================
     std::cout << "\n--- PRZETWARZANIE SKRYPTU ---\n";

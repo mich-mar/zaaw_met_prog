@@ -1,22 +1,104 @@
-// najpierw chwilę postój
-Pause 1000
+// Ustaw pozycję początkową Steve'a (neutralna poza)
+Set SteveBody  0    0    1.0   0 0 0
+Set SteveHead  0    0    1.6   0 0 0
+Set SteveLegL  0   -0.2  0.5   0 0 0
+Set SteveLegR  0    0.2  0.5   0 0 0
+Set SteveArmL  0   -0.4  1.2   0 0 0
+Set SteveArmR  0    0.4  1.2   0 0 0
 
-// ustaw robota w pozycji startowej
-Set Robot 0 0 0  0 0 0
-Pause 500
+Pause 800
 
-// dwie rzeczy na raz: jedzie i się obraca
+// ===== KROK 1 =====
 Begin_Parallel_Actions
-  Move   Robot 1 4
-  Rotate Robot OZ 45 180
+  Rotate SteveLegL OY 90  30
+  Rotate SteveLegR OY 90 -30
+  Rotate SteveArmL OY 90 -30
+  Rotate SteveArmR OY 90  30
+  Move   SteveHead 2  0.4
+  Move   SteveBody 2  0.4
+  Move   SteveLegL 2  0.4
+  Move   SteveLegR 2  0.4
+  Move   SteveArmL 2  0.4
+  Move   SteveArmR 2  0.4
 End_Parallel_Actions
 
-Pause 1000
+Pause 100
 
-// znowu dwie rzeczy na raz
 Begin_Parallel_Actions
-  Rotate Robot OX 20  45
-  Rotate Robot OY 15 -45
+  Rotate SteveLegL OY 90 -30
+  Rotate SteveLegR OY 90  30
+  Rotate SteveArmL OY 90  30
+  Rotate SteveArmR OY 90 -30
+  Move   SteveHead 2  0.4
+  Move   SteveBody 2  0.4
+  Move   SteveLegL 2  0.4
+  Move   SteveLegR 2  0.4
+  Move   SteveArmL 2  0.4
+  Move   SteveArmR 2  0.4
+End_Parallel_Actions
+
+Pause 200
+
+
+// ===== KROK 2 =====
+Begin_Parallel_Actions
+  Rotate SteveLegL OY 90  30
+  Rotate SteveLegR OY 90 -30
+  Rotate SteveArmL OY 90 -30
+  Rotate SteveArmR OY 90  30
+  Move   SteveHead 2  0.4
+  Move   SteveBody 2  0.4
+  Move   SteveLegL 2  0.4
+  Move   SteveLegR 2  0.4
+  Move   SteveArmL 2  0.4
+  Move   SteveArmR 2  0.4
+End_Parallel_Actions
+
+Pause 100
+
+Begin_Parallel_Actions
+  Rotate SteveLegL OY 90 -30
+  Rotate SteveLegR OY 90  30
+  Rotate SteveArmL OY 90  30
+  Rotate SteveArmR OY 90 -30
+  Move   SteveHead 2  0.4
+  Move   SteveBody 2  0.4
+  Move   SteveLegL 2  0.4
+  Move   SteveLegR 2  0.4
+  Move   SteveArmL 2  0.4
+  Move   SteveArmR 2  0.4
+End_Parallel_Actions
+
+Pause 200
+
+
+// ===== KROK 3 =====
+Begin_Parallel_Actions
+  Rotate SteveLegL OY 90  30
+  Rotate SteveLegR OY 90 -30
+  Rotate SteveArmL OY 90 -30
+  Rotate SteveArmR OY 90  30
+  Move   SteveHead 2  0.4
+  Move   SteveBody 2  0.4
+  Move   SteveLegL 2  0.4
+  Move   SteveLegR 2  0.4
+  Move   SteveArmL 2  0.4
+  Move   SteveArmR 2  0.4
+End_Parallel_Actions
+
+Pause 100
+
+Begin_Parallel_Actions
+  Rotate SteveLegL OY 90 -30
+  Rotate SteveLegR OY 90  30
+  Rotate SteveArmL OY 90  30
+  Rotate SteveArmR OY 90 -30
+  Move   SteveHead 2  0.4
+  Move   SteveBody 2  0.4
+  Move   SteveLegL 2  0.4
+  Move   SteveLegR 2  0.4
+  Move   SteveArmL 2  0.4
+  Move   SteveArmR 2  0.4
 End_Parallel_Actions
 
 Pause 1000
