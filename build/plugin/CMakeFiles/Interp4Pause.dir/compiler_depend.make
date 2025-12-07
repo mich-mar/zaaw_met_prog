@@ -227,8 +227,24 @@ plugin/CMakeFiles/Interp4Pause.dir/src/Interp4Pause.cpp.o: /home/michal/Document
   /usr/include/c++/11/ctime \
   /usr/include/c++/11/bits/parse_numbers.h \
   /usr/include/c++/11/bits/std_mutex.h \
-  /usr/include/c++/11/bits/unique_lock.h
+  /usr/include/c++/11/bits/unique_lock.h \
+  /usr/include/c++/11/sstream \
+  /usr/include/c++/11/bits/sstream.tcc \
+  /usr/include/c++/11/thread \
+  /usr/include/c++/11/bits/std_thread.h \
+  /usr/include/c++/11/bits/refwrap.h \
+  /usr/include/c++/11/bits/unique_ptr.h \
+  /usr/include/c++/11/bits/this_thread_sleep.h \
+  /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/ComChannel.hh
 
+
+/home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/ComChannel.hh:
+
+/usr/include/c++/11/bits/refwrap.h:
+
+/usr/include/c++/11/bits/std_thread.h:
+
+/usr/include/c++/11/sstream:
 
 /usr/include/c++/11/bits/parse_numbers.h:
 
@@ -324,6 +340,8 @@ plugin/CMakeFiles/Interp4Pause.dir/src/Interp4Pause.cpp.o: /home/michal/Document
 
 /usr/include/c++/11/cerrno:
 
+/usr/include/c++/11/thread:
+
 /usr/include/stdio.h:
 
 /usr/include/c++/11/chrono:
@@ -351,6 +369,8 @@ plugin/CMakeFiles/Interp4Pause.dir/src/Interp4Pause.cpp.o: /home/michal/Document
 /usr/include/c++/11/bits/functional_hash.h:
 
 /usr/include/c++/11/string_view:
+
+/usr/include/c++/11/bits/this_thread_sleep.h:
 
 /usr/include/c++/11/tr1/exp_integral.tcc:
 
@@ -447,6 +467,8 @@ plugin/CMakeFiles/Interp4Pause.dir/src/Interp4Pause.cpp.o: /home/michal/Document
 /usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h:
+
+/usr/include/c++/11/bits/unique_ptr.h:
 
 /usr/include/c++/11/ostream:
 
@@ -657,6 +679,8 @@ plugin/CMakeFiles/Interp4Pause.dir/src/Interp4Pause.cpp.o: /home/michal/Document
 /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
 
 /usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
+
+/usr/include/c++/11/bits/sstream.tcc:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
 

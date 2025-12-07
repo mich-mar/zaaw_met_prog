@@ -7,48 +7,11 @@
   </Plugins>
 
   <Objects>
-
-    <Cube Name="base_link"
+    <!-- Jeden prosty obiekt testowy -->
+    <Cube Name="Robot"
           Shift="0 0 0"
-          Scale="0.06 0.012 0.012"
+          Scale="0.2 0.05 0.05"
           Trans_m="0 0 0"
-          RGB="150 150 150"/>
-
-    <Cube Name="link_1_1"
-          Shift="0 0 0"
-          Scale="0.0157 0.0031 0.0031"
-          Trans_m="-0.002447 -0.063 -0.001614"
-          RGB="150 150 150"/>
-
-    <Cube Name="link_2_1"
-          Shift="0 0 0"
-          Scale="0.1745 0.0349 0.0349"
-          Trans_m="-0.002253 -0.078512 -0.004446"
-          RGB="150 150 150"/>
-
-    <Cube Name="link_3_1"
-          Shift="0 0 0"
-          Scale="0.0642 0.0128 0.0128"
-          Trans_m="0.050046 -0.244073 -0.034207"
-          RGB="150 150 150"/>
-
-    <Cube Name="link_4_1"
-          Shift="0 0 0"
-          Scale="0.1567 0.0313 0.0313"
-          Trans_m="0.07012 -0.305037 0.001482"
-          RGB="150 150 150"/>
-
-    <Cube Name="link_5_1"
-          Shift="0 0 0"
-          Scale="0.1292 0.0258 0.0258"
-          Trans_m="0.174242 -0.19174 -0.050084"
-          RGB="150 150 150"/>
-
-    <Cube Name="efector_1"
-          Shift="0 0 0"
-          Scale="0.05 0.02 0.02"
-          Trans_m="0.162881 -0.305491 0.006983"
-          RGB="180 180 180"/>
-
+          RGB="200 0 0"/>
   </Objects>
 </Config>

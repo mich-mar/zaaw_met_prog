@@ -42,7 +42,7 @@ public:
      * \param sMsg - napis do wysłania (musi kończyć się znakiem nowej linii).
      * \return Ilość wysłanych bajtów lub wartość ujemna w przypadku błędu.
      */
-    int Send(const char *sMsg);
+    int Send(const char *sMsg) override;
 
     // --- Metody wirtualne z AbstractComChannel ---
     

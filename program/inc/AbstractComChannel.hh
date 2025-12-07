@@ -43,6 +43,14 @@ public:
      * nie musi posiadać własnego obiektu mutexa (to rola klasy pochodnej).
      */
     virtual std::mutex &UseGuard() = 0;
+
+    /*!
+     * \brief Wysyła komunikat przez kanał.
+     * \param[in] sMesg - wskaźnik na komunikat do wysłania (ciąg znaków zakończony '\0').
+     * \retval liczba znaków wysłanych w ramach komunikatu,
+     * \retval -1 w przypadku błędu.
+     */
+    virtual int Send(const char *sMesg) = 0;
 };
 
 #endif

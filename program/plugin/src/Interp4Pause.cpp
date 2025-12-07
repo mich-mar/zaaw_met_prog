@@ -1,4 +1,5 @@
 #include "Interp4Pause.hh"
+#include "ComChannel.hh" 
 #include <iostream>
 
 /**
@@ -17,6 +18,14 @@ extern "C" {
   const char* GetCmdName(void) {
     return "Pause";
   }
+}
+
+/**
+ * @brief Domyślny konstruktor
+ */
+Interp4Pause::Interp4Pause()
+  : _Time_ms(0)
+{
 }
 
 /**
@@ -72,7 +81,11 @@ void Interp4Pause::PrintParams() const
 /**
  * @brief Wykonuje polecenie (na razie puste)
  */
-bool Interp4Pause::ExecCmd(AbstractScene &rScn, const char *sMobObjName, AbstractComChannel &rComChann) {
-  std::cout << "ExecCmd for Pause - not implemented in Stage 1." << std::endl;
-  return true;
+bool Interp4Pause::ExecCmd(AbstractScene      &,
+                           const char         *,
+                           AbstractComChannel &)
+{
+    std::cout << "[Pause] " << _Time_ms << " ms\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(_Time_ms));
+    return true;
 }

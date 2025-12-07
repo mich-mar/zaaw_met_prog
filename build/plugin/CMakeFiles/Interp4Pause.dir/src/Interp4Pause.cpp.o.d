@@ -184,4 +184,9 @@ plugin/CMakeFiles/Interp4Pause.dir/src/Interp4Pause.cpp.o: \
  /usr/include/c++/11/ratio /usr/include/c++/11/ctime \
  /usr/include/c++/11/bits/parse_numbers.h \
  /usr/include/c++/11/bits/std_mutex.h \
- /usr/include/c++/11/bits/unique_lock.h
+ /usr/include/c++/11/bits/unique_lock.h /usr/include/c++/11/sstream \
+ /usr/include/c++/11/bits/sstream.tcc /usr/include/c++/11/thread \
+ /usr/include/c++/11/bits/std_thread.h /usr/include/c++/11/bits/refwrap.h \
+ /usr/include/c++/11/bits/unique_ptr.h \
+ /usr/include/c++/11/bits/this_thread_sleep.h \
+ /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/ComChannel.hh

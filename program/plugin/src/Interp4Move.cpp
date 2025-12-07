@@ -1,4 +1,5 @@
 #include "Interp4Move.hh"
+#include "ComChannel.hh" 
 #include <iostream>
 
 /**
@@ -69,7 +70,73 @@ void Interp4Move::PrintParams() const
 /**
  * @brief Wykonuje polecenie (na razie puste)
  */
-bool Interp4Move::ExecCmd(AbstractScene &rScn, const char *sMobObjName, AbstractComChannel &rComChann) {
-  std::cout << "ExecCmd for Move - not implemented in Stage 1." << std::endl;
-  return true;
+bool Interp4Move::ExecCmd(AbstractScene      &rScn,
+                          const char         *sMobObjName,
+                          AbstractComChannel &rComChann)
+{
+    if (sMobObjName == nullptr) {
+        std::cerr << "Interp4Move::ExecCmd: brak nazwy obiektu\n";
+        return false;
+    }
+
+    AbstractMobileObj *pObj = rScn.FindMobileObj(sMobObjName);
+    if (pObj == nullptr) {
+        std::cerr << "Interp4Move::ExecCmd: obiekt '"
+                  << sMobObjName << "' nie znaleziony\n";
+        return false;
+    }
+
+    if (_Distance == 0.0 || _Speed == 0.0) {
+        // nic do zrobienia – ale nie traktujemy jako błąd
+        return true;
+    }
+
+    Vector3D pos = pObj->GetPositoin_m();
+
+    const double dist_abs  = std::abs(_Distance);
+    const double speed_abs = std::abs(_Speed);
+    double total_time = dist_abs / speed_abs;        // [s]
+
+    // Parametry dyskretyzacji animacji
+    const double dt_min = 0.01;                      // minimalny krok czasu [s] (20 ms)
+    int steps = static_cast<int>(total_time / dt_min);
+    if (steps < 1) steps = 1;
+
+    const double step_time   = total_time / steps;   // [s]
+    const double step_dist   = _Distance / steps;    // [m] (z uwzględnionym znakiem)
+
+    // Kierunek ruchu – zgodnie z yaw
+    const double yaw_deg = pObj->GetAng_Yaw_deg();
+    const double yaw_rad = yaw_deg * M_PI / 180.0;
+    const double dir_x   = std::cos(yaw_rad);
+    const double dir_y   = std::sin(yaw_rad);
+
+    for (int i = 0; i < steps; ++i) {
+        pos[0] += dir_x * step_dist;
+        pos[1] += dir_y * step_dist;
+        // pos[2] zostaje bez zmian
+
+        pObj->SetPosition_m(pos);
+
+        std::ostringstream msg;
+        msg << "UpdateObj Name=" << pObj->GetName()
+            << " Trans_m=("
+            << pos[0] << "," << pos[1] << "," << pos[2] << ")\n";
+
+        const std::string cmd = msg.str();
+
+        rComChann.LockAccess();
+        if (rComChann.Send(cmd.c_str()) < 0) {
+            std::cerr << "Interp4Move::ExecCmd: blad Send()\n";
+            rComChann.UnlockAccess();
+            return false;
+        }
+        rComChann.UnlockAccess();
+
+        std::this_thread::sleep_for(
+            std::chrono::duration<double>(step_time)
+        );
+    }
+
+    return true;
 }

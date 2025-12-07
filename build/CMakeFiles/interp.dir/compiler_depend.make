@@ -477,6 +477,11 @@ CMakeFiles/interp.dir/src/main.cpp.o: /home/michal/Documents/studia/sem_7/zaaw_m
   /usr/include/c++/11/bits/parse_numbers.h \
   /usr/include/c++/11/bits/std_mutex.h \
   /usr/include/c++/11/bits/unique_lock.h \
+  /usr/include/c++/11/thread \
+  /usr/include/c++/11/bits/std_thread.h \
+  /usr/include/c++/11/bits/refwrap.h \
+  /usr/include/c++/11/bits/unique_ptr.h \
+  /usr/include/c++/11/bits/this_thread_sleep.h \
   /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/AbstractMobileObj.hh \
   /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/Cuboid.hh \
   /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/preprocesor.hh \
@@ -487,11 +492,9 @@ CMakeFiles/interp.dir/src/main.cpp.o: /home/michal/Documents/studia/sem_7/zaaw_m
   /usr/include/c++/11/bits/stl_raw_storage_iter.h \
   /usr/include/c++/11/bits/align.h \
   /usr/include/c++/11/bit \
-  /usr/include/c++/11/bits/unique_ptr.h \
   /usr/include/c++/11/bits/shared_ptr.h \
   /usr/include/c++/11/bits/shared_ptr_base.h \
   /usr/include/c++/11/bits/allocated_ptr.h \
-  /usr/include/c++/11/bits/refwrap.h \
   /usr/include/c++/11/ext/concurrence.h \
   /usr/include/c++/11/bits/shared_ptr_atomic.h \
   /usr/include/c++/11/bits/atomic_base.h \
@@ -1194,8 +1197,6 @@ CMakeFiles/interp.dir/src/xmlinterp.cpp.o: /home/michal/Documents/studia/sem_7/z
 
 /usr/include/c++/11/bits/allocated_ptr.h:
 
-/usr/include/c++/11/bits/unique_ptr.h:
-
 /usr/include/xercesc/util/QName.hpp:
 
 /usr/include/c++/11/bit:
@@ -1213,6 +1214,8 @@ CMakeFiles/interp.dir/src/xmlinterp.cpp.o: /home/michal/Documents/studia/sem_7/z
 /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/Configuration.hh:
 
 /home/michal/Documents/studia/sem_7/zaaw_met_prog/program/inc/preprocesor.hh:
+
+/usr/include/c++/11/bits/unique_ptr.h:
 
 /usr/include/assert.h:
 
@@ -1506,6 +1509,8 @@ CMakeFiles/interp.dir/src/xmlinterp.cpp.o: /home/michal/Documents/studia/sem_7/z
 
 /usr/include/linux/errno.h:
 
+/usr/include/c++/11/thread:
+
 /usr/include/c++/11/ratio:
 
 /usr/include/c++/11/ext/type_traits.h:
@@ -1541,6 +1546,8 @@ CMakeFiles/interp.dir/src/xmlinterp.cpp.o: /home/michal/Documents/studia/sem_7/z
 /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
 
 /usr/include/xercesc/util/NoSuchElementException.hpp:
+
+/usr/include/c++/11/bits/std_thread.h:
 
 /usr/include/c++/11/bits/cpp_type_traits.h:
 
@@ -1743,6 +1750,8 @@ CMakeFiles/interp.dir/src/xmlinterp.cpp.o: /home/michal/Documents/studia/sem_7/z
 /usr/include/c++/11/bits/streambuf_iterator.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/ctype_inline.h:
+
+/usr/include/c++/11/bits/this_thread_sleep.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
 

@@ -13,6 +13,9 @@
 #include "AbstractScene.hh"
 #include "AbstractComChannel.hh"
 #include <sstream>
+#include <iostream>
+#include <thread>
+#include <chrono>
 
 
 

@@ -93,7 +93,50 @@ void Interp4Set::PrintParams() const
 /**
  * @brief Wykonuje polecenie (na razie puste)
  */
-bool Interp4Set::ExecCmd(AbstractScene &rScn, const char *sMobObjName, AbstractComChannel &rComChann) {
-  std::cout << "ExecCmd for Set - not implemented in Stage 1." << std::endl;
-  return true;
+bool Interp4Set::ExecCmd(AbstractScene      &rScn,
+                         const char         *sMobObjName,
+                         AbstractComChannel &rComChann)
+{
+    if (sMobObjName == nullptr) {
+        std::cerr << "Interp4Set::ExecCmd: brak nazwy obiektu\n";
+        return false;
+    }
+
+    AbstractMobileObj *pObj = rScn.FindMobileObj(sMobObjName);
+    if (pObj == nullptr) {
+        std::cerr << "Interp4Set::ExecCmd: obiekt '"
+                  << sMobObjName << "' nie znaleziony\n";
+        return false;
+    }
+
+    // 1. aktualizacja sceny
+    pObj->SetPosition_m(_Pos_m);
+    pObj->SetAng_Roll_deg(_Roll_deg);
+    pObj->SetAng_Pitch_deg(_Pitch_deg);
+    pObj->SetAng_Yaw_deg(_Yaw_deg);
+
+    // 2. przygotowanie komendy tekstowej
+    std::ostringstream msg;
+    msg << "UpdateObj Name=" << pObj->GetName()
+        << " Trans_m=("
+        << _Pos_m[0] << "," << _Pos_m[1] << "," << _Pos_m[2] << ")"
+        << " RotXYZ_deg=("
+        << _Roll_deg  << ","
+        << _Pitch_deg << ","
+        << _Yaw_deg   << ")\n";
+
+    const std::string cmd = msg.str();
+
+    // 3. wysłanie przez interfejs AbstractComChannel
+    rComChann.LockAccess();
+
+    if (rComChann.Send(cmd.c_str()) < 0) {
+        std::cerr << "Interp4Set::ExecCmd: blad Send()\n";
+        rComChann.UnlockAccess();
+        return false;
+    }
+
+    rComChann.UnlockAccess();
+    return true;
 }
+

@@ -1,31 +1,27 @@
-// Test sterowania jamnikiem
-#define IDZ Move
+// Prosty test wszystkich komend na obiekcie "Robot"
 
-// Start
 Pause 1000
 
-// Ustaw jamnika w przestrzeni
-Set Jamnik 0 0 0 0 0 0
-
-// Jamnik idzie do przodu
-IDZ Jamnik 5 4
-
-Pause 800
-
-// Jamnik merda ogonem
-Rotate Jamnik.Ogon OY 20 45
-Rotate Jamnik.Ogon OY 20 -45
-Rotate Jamnik.Ogon OY 20 45
-Rotate Jamnik.Ogon OY 20 -45
-
+// Ustaw robota w pozycji początkowej (0,0,0), bez obrotu
+Set Robot 0 0 0  0 0 0
 Pause 500
 
-// Podnosi lewą przednią łapę
-Rotate Jamnik.LapaLF OX 15 40
-Pause 300
-Rotate Jamnik.LapaLF OX 15 -40
+// Przesuń robota wzdłuż osi X
+Move Robot 1 2
+Pause 800
 
-Pause 900
+// Obrót wokół osi OZ (yaw)
+Rotate Robot OZ 30 45
+Pause 800
 
-// Wraca
-Move Jamnik -5 4
+// Obrót wokół osi OX (roll)
+Rotate Robot OX 20 30
+Pause 800
+
+// Obrót wokół osi OY (pitch)
+Rotate Robot OY 10 -30
+Pause 800
+
+// Ruch w przeciwną stronę po osi X
+Move Robot -1 2
+Pause 1000
