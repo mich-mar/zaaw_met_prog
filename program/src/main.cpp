@@ -37,17 +37,28 @@ std::string Vec2Str(const Vector3D& vec) {
     return ss.str();
 }
 
-int main()
+int main(int argc, char** argv)
 {
+    // ===============================================================
+    // 0. Wczytywanie argumentów wywołania
+    // ===============================================================
+    if (argc != 3) {
+        std::cerr << "Uzycie: " << argv[0]
+                  << " plik_skrpyptu.cmd plik_konfiguracji.xml\n";
+        return 1;
+    }
+
+    const char* scriptName = argv[1];
+    const char* configName = argv[2];
+
+
     // ================================================================
     // 1. Wczytanie konfiguracji XML
     // ================================================================
     Configuration config;
 
     std::cout << "--- WCZYTYWANIE KONFIGURACJI ---\n";
-    if (!ReadXML("config.xml", config)) {
-        return 1;   // krytyczny błąd – przerwij program
-    }
+    if (!ReadXML(configName, config)) return 1;
 
     // ================================================================
     // 2. Połączenie z serwerem i przygotowanie sceny
@@ -134,45 +145,76 @@ int main()
     // ================================================================
     std::cout << "\n--- PRZETWARZANIE SKRYPTU ---\n";
 
-    const char* script = "skrypt.spr";
-
     // Sprawdzamy czy plik istnieje
-    if (!std::ifstream(script)) {
-        std::cerr << "!!! Brak pliku: " << script << "\n";
-    } 
-    else 
+    if (!std::ifstream(scriptName)) {
+        std::cerr << "!!! Brak pliku: " << scriptName << "\n";
+    }
+    else
     {
-        // Uruchamiamy preprocesor (obsługuje m.in. #include)
-        std::string preprocOutput = runPreprocesor(script);
+        // Uruchamiamy preprocesor (obsługuje m.in. #include, #define itd.)
+        std::string preprocOutput = runPreprocesor(scriptName);
         std::stringstream ss(preprocOutput);
 
         std::string cmdName;
         while (ss >> cmdName) {
 
-            // Sprawdzamy czy komenda istnieje
-            if (!pluginCommands.count(cmdName)) {
+            // 1. Sprawdzamy czy komenda istnieje
+            auto it = pluginCommands.find(cmdName);
+            if (it == pluginCommands.end()) {
                 std::cerr << "!!! Nieznane polecenie: " << cmdName << "\n";
-                std::string dummy; 
-                std::getline(ss, dummy); // pomijamy resztę linii
+                std::string dummy;
+                std::getline(ss, dummy);   // pomijamy resztę linii
                 continue;
             }
 
-            // Tworzymy obiekt komendy
-            AbstractInterp4Command* cmd = pluginCommands[cmdName]();
+            // 2. Dla komend innych niż Pause czytamy nazwę obiektu
+            std::string objName;
+            const char *pObjName = nullptr;
 
-            // Wczytanie parametrów
-            if (cmd->ReadParams(ss)) {
-                std::cout << " Wykonuje: ";
-                cmd->PrintCmd();
-                // TU w kolejnych etapach wywołanie: cmd->ExecCmd(...)
-            } 
-            else {
-                std::cerr << "!!! Blad parametrow polecenia\n";
+            if (cmdName != "Pause") {
+                if (!(ss >> objName)) {
+                    std::cerr << "!!! Brak nazwy obiektu dla komendy: "
+                              << cmdName << "\n";
+                    std::string dummy;
+                    std::getline(ss, dummy);   // pomijamy resztę linii
+                    continue;
+                }
+                pObjName = objName.c_str();
+            }
+
+            // 3. Tworzymy obiekt komendy
+            AbstractInterp4Command* cmd = it->second();
+            if (!cmd) {
+                std::cerr << "!!! CreateCmd() zwrocilo nullptr dla: "
+                          << cmdName << "\n";
+                std::string dummy;
+                std::getline(ss, dummy);
+                continue;
+            }
+
+            // 4. Wczytanie parametrów (JUŻ BEZ nazwy obiektu!)
+            if (!cmd->ReadParams(ss)) {
+                std::cerr << "!!! Blad parametrow polecenia: "
+                          << cmdName << "\n";
+                delete cmd;
+                std::string dummy;
+                std::getline(ss, dummy);
+                continue;
+            }
+
+            std::cout << " Wykonuje: ";
+            cmd->PrintCmd();
+
+            // 5. Wykonanie komendy na scenie + wysłanie do serwera
+            if (!cmd->ExecCmd(scene, pObjName, channel)) {
+                std::cerr << "!!! ExecCmd nie powiodlo sie dla komendy: "
+                          << cmdName << "\n";
             }
 
             delete cmd;
         }
     }
+
 
     // ================================================================
     // 5. Sprzątanie

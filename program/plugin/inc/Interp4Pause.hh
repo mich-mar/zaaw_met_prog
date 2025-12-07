@@ -27,13 +27,19 @@ class Interp4Pause: public AbstractInterp4Command {
   /**
    * @brief Przechowuje wczytany czas pauzy w milisekundach
    */
-  unsigned int _PauseTime_ms = 0;
+  unsigned int _Time_ms;   // czas pauzy
 
  public:
   /*!
    * \brief Domyślny konstruktor
    */
-  Interp4Pause() = default;  
+  Interp4Pause();
+
+  /*!
+   * \brief Wirtualny destruktor
+   */
+  virtual ~Interp4Pause() {};
+
   /*!
    * \brief Wyświetla postać bieżącego polecenia (nazwę oraz wartości parametrów)
    */

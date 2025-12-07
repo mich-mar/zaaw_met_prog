@@ -20,6 +20,17 @@ extern "C" {
 }
 
 /**
+ * @brief Domyślny konstruktor
+ */
+Interp4Set::Interp4Set()
+{
+  _Pos_m[0] = _Pos_m[1] = _Pos_m[2] = 0.0;
+  _Roll_deg  = 0.0;
+  _Pitch_deg = 0.0;
+  _Yaw_deg   = 0.0;
+}
+
+/**
  * @brief Statyczna metoda fabryczna
  */
 AbstractInterp4Command* Interp4Set::CreateCmd() {
@@ -29,8 +40,10 @@ AbstractInterp4Command* Interp4Set::CreateCmd() {
 /**
  * @brief Wczytuje 6 parametrów polecenia ze strumienia.
  */
-bool Interp4Set::ReadParams(std::istream &rStrm_CmdsList) {
-  if (!(rStrm_CmdsList >> _PosX_m >> _PosY_m >> _PosZ_m >> _Ang_Roll_deg >> _Ang_Pitch_deg >> _Ang_Yaw_deg)) {
+bool Interp4Set::ReadParams(std::istream &rStrm_CmdsList)
+{
+  if (!(rStrm_CmdsList >> _Pos_m[0] >> _Pos_m[1] >> _Pos_m[2]
+                       >> _Roll_deg >> _Pitch_deg >> _Yaw_deg)) {
     return false;
   }
   return true;
@@ -39,9 +52,15 @@ bool Interp4Set::ReadParams(std::istream &rStrm_CmdsList) {
 /**
  * @brief Wyświetla pełną postać polecenia (z wczytanymi parametrami)
  */
-void Interp4Set::PrintCmd() const {
-  std::cout << GetCmdName() << " " << _PosX_m << " " << _PosY_m << " " << _PosZ_m
-            << " " << _Ang_Roll_deg << " " << _Ang_Pitch_deg << " " << _Ang_Yaw_deg << std::endl;
+void Interp4Set::PrintCmd() const
+{
+  std::cout << GetCmdName() << "  "
+       << _Pos_m[0] << " "
+       << _Pos_m[1] << " "
+       << _Pos_m[2] << "  "
+       << _Roll_deg  << " "
+       << _Pitch_deg << " "
+       << _Yaw_deg   << std::endl;
 }
 
 /**
@@ -54,16 +73,21 @@ const char* Interp4Set::GetCmdName() const {
 /**
  * @brief Wyświetla składnię polecenia
  */
-void Interp4Set::PrintSyntax() const {
-  std::cout << "Syntax: Set [X_m] [Y_m] [Z_m] [Roll_deg] [Pitch_deg] [Yaw_deg]" << std::endl;
+void Interp4Set::PrintSyntax() const
+{
+  std::cout << "   Set  NazwaObiektu  x[m] y[m] z[m]  roll[deg] pitch[deg] yaw[deg]" << std::endl;
 }
 
 /**
  * @brief Wyświetla same parametry
  */
-void Interp4Set::PrintParams() const {
-  std::cout << " Pos: (" << _PosX_m << ", " << _PosY_m << ", " << _PosZ_m << ")"
-            << " Ang: (" << _Ang_Roll_deg << ", " << _Ang_Pitch_deg << ", " << _Ang_Yaw_deg << ")" << std::endl;
+void Interp4Set::PrintParams() const
+{
+  std::cout << "   Pos: (" << _Pos_m[0] << ", " << _Pos_m[1] << ", " << _Pos_m[2] << ")"
+       << "  Roll: "  << _Roll_deg
+       << "  Pitch: " << _Pitch_deg
+       << "  Yaw: "   << _Yaw_deg
+       << std::endl;
 }
 
 /**

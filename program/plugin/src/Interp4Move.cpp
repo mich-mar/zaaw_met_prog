@@ -25,9 +25,9 @@ extern "C" {
  * Czyta 3 liczby ze strumienia, "zabierając" je z niego,
  * aby główna pętla interpretera mogła wczytać następne polecenie.
  */
-bool Interp4Move::ReadParams(std::istream &rStrm_CmdsList) {
-  if (!(rStrm_CmdsList >> _VelX_mm_s >> _VelY_mm_s >> _VelZ_mm_s)) {
-    // Jeśli się nie udało (np. koniec pliku, zły format)
+bool Interp4Move::ReadParams(std::istream &rStrm_CmdsList)
+{
+  if (!(rStrm_CmdsList >> _Speed >> _Distance)) {
     return false;
   }
   return true;
@@ -36,10 +36,11 @@ bool Interp4Move::ReadParams(std::istream &rStrm_CmdsList) {
 /**
  * @brief Wyświetla pełną postać polecenia (z wczytanymi parametrami)
  */
-void Interp4Move::PrintCmd() const {
-  std::cout << GetCmdName() << " " << _VelX_mm_s << " " << _VelY_mm_s << " " << _VelZ_mm_s << std::endl;
+void Interp4Move::PrintCmd() const
+{
+  std::cout << GetCmdName() << "  "
+       << _Speed << "  " << _Distance << std::endl;
 }
-
 /**
  * @brief Zwraca nazwę polecenia
  */
@@ -50,16 +51,20 @@ const char* Interp4Move::GetCmdName() const {
 /**
  * @brief Wyświetla składnię polecenia
  */
-void Interp4Move::PrintSyntax() const {
-  std::cout << "Syntax: Move [VelX_mm/s] [VelY_mm/s] [VelZ_mm/s]" << std::endl;
+void Interp4Move::PrintSyntax() const
+{
+  std::cout << "   Move  NazwaObiektu  Szybkosc[m/s]  DlugoscDrogi[m]" << std::endl;
 }
 
 /**
  * @brief Wyświetla same parametry
  */
-void Interp4Move::PrintParams() const {
-  std::cout << " VelX: " << _VelX_mm_s << ", VelY: " << _VelY_mm_s << ", VelZ: " << _VelZ_mm_s << std::endl;
+void Interp4Move::PrintParams() const
+{
+  std::cout << "   Szybkosc: " << _Speed
+       << "  DlugoscDrogi: " << _Distance << std::endl;
 }
+
 
 /**
  * @brief Wykonuje polecenie (na razie puste)

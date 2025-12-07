@@ -19,7 +19,6 @@ extern "C" {
   }
 }
 
-
 /**
  * @brief Statyczna metoda fabryczna
  */
@@ -30,9 +29,10 @@ AbstractInterp4Command* Interp4Pause::CreateCmd() {
 /**
  * @brief Wczytuje parametr polecenia (czas pauzy) ze strumienia.
  */
-bool Interp4Pause::ReadParams(std::istream &rStrm_CmdsList) {
-  // Wczytaj jeden parametr (unsigned int)
-  if (!(rStrm_CmdsList >> _PauseTime_ms)) {
+bool Interp4Pause::ReadParams(std::istream &rStrm_CmdsList)
+{
+  // Pause czas_pauzy_ms
+  if (!(rStrm_CmdsList >> _Time_ms)) {
     return false;
   }
   return true;
@@ -41,8 +41,9 @@ bool Interp4Pause::ReadParams(std::istream &rStrm_CmdsList) {
 /**
  * @brief Wyświetla pełną postać polecenia (z wczytanym parametrem)
  */
-void Interp4Pause::PrintCmd() const {
-  std::cout << GetCmdName() << " " << _PauseTime_ms << std::endl;
+void Interp4Pause::PrintCmd() const
+{
+  std::cout << GetCmdName() << "  " << _Time_ms << std::endl;
 }
 
 /**
@@ -55,15 +56,17 @@ const char* Interp4Pause::GetCmdName() const {
 /**
  * @brief Wyświetla składnię polecenia
  */
-void Interp4Pause::PrintSyntax() const {
-  std::cout << "Syntax: Pause [PauseTime_ms]" << std::endl;
+void Interp4Pause::PrintSyntax() const
+{
+  std::cout << "   Pause  CzasPauzy_ms" << std::endl;
 }
 
 /**
  * @brief Wyświetla same parametry
  */
-void Interp4Pause::PrintParams() const {
-  std::cout << " PauseTime_ms: " << _PauseTime_ms << std::endl;
+void Interp4Pause::PrintParams() const
+{
+  std::cout << "   CzasPauzy: " << _Time_ms << " [ms]" << std::endl;
 }
 
 /**
@@ -71,6 +74,5 @@ void Interp4Pause::PrintParams() const {
  */
 bool Interp4Pause::ExecCmd(AbstractScene &rScn, const char *sMobObjName, AbstractComChannel &rComChann) {
   std::cout << "ExecCmd for Pause - not implemented in Stage 1." << std::endl;
-  // W przyszłości: usleep(_PauseTime_ms * 1000); // usleep wymaga mikrosekund
   return true;
 }

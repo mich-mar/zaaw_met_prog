@@ -20,19 +20,21 @@
  */
 class Interp4Rotate: public AbstractInterp4Command {
 
-  /**
-   * @brief Przechowuje wczytane parametry polecenia
-   */
-  double _AngVel_Roll_deg_s = 0;  // Prędkość obrotu (Roll)
-  double _AngVel_Pitch_deg_s = 0; // Prędkość obrotu (Pitch)
-  double _AngVel_Yaw_deg_s = 0;   // Prędkość obrotu (Yaw)
+  std::string _AxisName;    // np. "OX", "OY", "OZ"
+  double      _AngSpeed_deg_s; // [deg/s]
+  double      _Angle_deg;      // [deg]
 
 public:
 
   /*!
-   * \brief
+   * \brief Konstruktor domyślny
    */
-  Interp4Rotate() = default;  
+  Interp4Rotate();
+
+  /*!
+   * \brief Wirtualny destruktor
+   */
+  virtual ~Interp4Rotate() {}
 
   /*!
    * \brief Wyświetla postać bieżącego polecenia (nazwę oraz wartości parametrów)

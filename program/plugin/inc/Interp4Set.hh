@@ -6,7 +6,10 @@
 # pragma implementation
 #endif
 
+#include <iostream>
+#include <string>
 #include "AbstractInterp4Command.hh"
+#include "Vector3D.hh"
 
 /*!
  * \file
@@ -27,18 +30,16 @@ class Interp4Set: public AbstractInterp4Command {
   /**
    * @brief Przechowuje wczytane parametry polecenia
    */
-  double _PosX_m = 0;
-  double _PosY_m = 0;
-  double _PosZ_m = 0;
-  double _Ang_Roll_deg = 0;
-  double _Ang_Pitch_deg = 0;
-  double _Ang_Yaw_deg = 0;
+  Vector3D _Pos_m;          // pozycja [m]
+  double   _Roll_deg;       // [deg]
+  double   _Pitch_deg;      // [deg]
+  double   _Yaw_deg;        // [deg]
 
  public:
   /*!
    * \brief Domyślny konstruktor
    */
-  Interp4Set() = default;  
+  Interp4Set();
   /*!
    * \brief Wyświetla postać bieżącego polecenia (nazwę oraz wartości parametrów)
    */

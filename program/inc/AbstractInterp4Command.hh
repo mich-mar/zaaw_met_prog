@@ -12,6 +12,8 @@
 
 #include "AbstractScene.hh"
 #include "AbstractComChannel.hh"
+#include <sstream>
+
 
 
  /*!

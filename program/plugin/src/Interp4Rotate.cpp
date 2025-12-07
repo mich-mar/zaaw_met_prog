@@ -20,11 +20,18 @@ extern "C" {
 }
 
 /**
+ * @brief Konstruktor domyślny
+ */
+Interp4Rotate::Interp4Rotate()
+: _AxisName("OZ"), _AngSpeed_deg_s(0.0), _Angle_deg(0.0)
+{}
+
+/**
  * @brief Wczytuje parametry polecenia (3x double) ze strumienia.
  */
-bool Interp4Rotate::ReadParams(std::istream &rStrm_CmdsList) {
-  if (!(rStrm_CmdsList >> _AngVel_Roll_deg_s >> _AngVel_Pitch_deg_s >> _AngVel_Yaw_deg_s)) {
-    // Jeśli się nie udało (np. koniec pliku, zły format)
+bool Interp4Rotate::ReadParams(std::istream &rStrm_CmdsList)
+{
+  if (!(rStrm_CmdsList >> _AxisName >> _AngSpeed_deg_s >> _Angle_deg)) {
     return false;
   }
   return true;
@@ -33,8 +40,12 @@ bool Interp4Rotate::ReadParams(std::istream &rStrm_CmdsList) {
 /**
  * @brief Wyświetla pełną postać polecenia (z wczytanymi parametrami)
  */
-void Interp4Rotate::PrintCmd() const {
-  std::cout << GetCmdName() << " " << _AngVel_Roll_deg_s << " " << _AngVel_Pitch_deg_s << " " << _AngVel_Yaw_deg_s << std::endl;
+void Interp4Rotate::PrintCmd() const
+{
+  std::cout << GetCmdName() << "  "
+       << _AxisName << "  "
+       << _AngSpeed_deg_s << "  "
+       << _Angle_deg << std::endl;
 }
 
 /**
@@ -47,15 +58,19 @@ const char* Interp4Rotate::GetCmdName() const {
 /**
  * @brief Wyświetla składnię polecenia
  */
-void Interp4Rotate::PrintSyntax() const {
-  std::cout << "Syntax: Rotate [AngVel_Roll] [AngVel_Pitch] [AngVel_Yaw]" << std::endl;
+void Interp4Rotate::PrintSyntax() const
+{
+  std::cout << "   Rotate  NazwaObiektu  OX|OY|OZ  SzybkoscKatowa[deg/s]  KatObrotu[deg]" << std::endl;
 }
-
 /**
  * @brief Wyświetla same parametry
  */
-void Interp4Rotate::PrintParams() const {
-  std::cout << " Roll: " << _AngVel_Roll_deg_s << ", Pitch: " << _AngVel_Pitch_deg_s << ", Yaw: " << _AngVel_Yaw_deg_s << std::endl;
+void Interp4Rotate::PrintParams() const
+{
+  std::cout << "   Oś: " << _AxisName
+       << "  SzybkoscKatowa: " << _AngSpeed_deg_s << " [deg/s]"
+       << "  KatObrotu: " << _Angle_deg << " [deg]"
+       << std::endl;
 }
 
 /**
