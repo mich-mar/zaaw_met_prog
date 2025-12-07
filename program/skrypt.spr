@@ -1,27 +1,22 @@
-// Prosty test wszystkich komend na obiekcie "Robot"
-
+// najpierw chwilę postój
 Pause 1000
 
-// Ustaw robota w pozycji początkowej (0,0,0), bez obrotu
+// ustaw robota w pozycji startowej
 Set Robot 0 0 0  0 0 0
 Pause 500
 
-// Przesuń robota wzdłuż osi X
-Move Robot 1 2
-Pause 800
+// dwie rzeczy na raz: jedzie i się obraca
+Begin_Parallel_Actions
+  Move   Robot 1 4
+  Rotate Robot OZ 45 180
+End_Parallel_Actions
 
-// Obrót wokół osi OZ (yaw)
-Rotate Robot OZ 30 45
-Pause 800
+Pause 1000
 
-// Obrót wokół osi OX (roll)
-Rotate Robot OX 20 30
-Pause 800
+// znowu dwie rzeczy na raz
+Begin_Parallel_Actions
+  Rotate Robot OX 20  45
+  Rotate Robot OY 15 -45
+End_Parallel_Actions
 
-// Obrót wokół osi OY (pitch)
-Rotate Robot OY 10 -30
-Pause 800
-
-// Ruch w przeciwną stronę po osi X
-Move Robot -1 2
 Pause 1000

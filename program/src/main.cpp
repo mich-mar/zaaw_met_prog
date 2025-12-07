@@ -37,6 +37,56 @@ std::string Vec2Str(const Vector3D& vec) {
     return ss.str();
 }
 
+static void ExecSingleCommandLine(
+    const std::string &cmdName,
+    std::istream      &lineStream,
+    const std::map<std::string, Fun_CreateCmd> &pluginCommands,
+    AbstractScene     &scene,
+    AbstractComChannel &channel
+)
+{
+    auto it = pluginCommands.find(cmdName);
+    if (it == pluginCommands.end()) {
+        std::cerr << "!!! Nieznane polecenie: " << cmdName << std::endl;
+        return;
+    }
+
+    AbstractInterp4Command *cmd = it->second();
+    if (cmd == nullptr) {
+        std::cerr << "!!! Blad CreateCmd() dla komendy: " << cmdName << std::endl;
+        return;
+    }
+
+    std::string objName;
+    const char *objCStr = nullptr;
+
+    // Pause nie ma nazwy obiektu, reszta – ma
+    if (cmdName != "Pause") {
+        if (!(lineStream >> objName)) {
+            std::cerr << "!!! Brak nazwy obiektu dla komendy: " << cmdName << std::endl;
+            delete cmd;
+            return;
+        }
+        objCStr = objName.c_str();
+    }
+
+    if (!cmd->ReadParams(lineStream)) {
+        std::cerr << "!!! Blad parametrow polecenia: " << cmdName << std::endl;
+        delete cmd;
+        return;
+    }
+
+    std::cout << " Wykonuje: ";
+    cmd->PrintCmd();
+
+    if (!cmd->ExecCmd(scene, objCStr, channel)) {
+        std::cerr << "!!! ExecCmd nie powiodlo sie dla komendy: "
+                  << cmdName << std::endl;
+    }
+
+    delete cmd;
+}
+
 int main(int argc, char** argv)
 {
     // ===============================================================
@@ -140,80 +190,83 @@ int main(int argc, char** argv)
         std::cout << "  Zaladowano: " << cmdName << "\n";
     }
 
-    // ================================================================
-    // 4. Przetwarzanie skryptu (po preprocesorze)
+        // ================================================================
+    // 4. Przetwarzanie skryptu (po preprocesorze) + akcje równoległe
     // ================================================================
     std::cout << "\n--- PRZETWARZANIE SKRYPTU ---\n";
 
-    // Sprawdzamy czy plik istnieje
-    if (!std::ifstream(scriptName)) {
-        std::cerr << "!!! Brak pliku: " << scriptName << "\n";
-    }
-    else
-    {
-        // Uruchamiamy preprocesor (obsługuje m.in. #include, #define itd.)
-        std::string preprocOutput = runPreprocesor(scriptName);
-        std::stringstream ss(preprocOutput);
+    std::string preprocOutput = runPreprocesor(scriptName);
+    std::istringstream scriptStream(preprocOutput);
 
+    std::string line;
+    while (std::getline(scriptStream, line)) {
+
+        // pomijamy puste linie
+        if (line.empty()) {
+            continue;
+        }
+
+        // pomijamy komentarze zaczynające się od //
+        {
+            std::string trimmed = line;
+            // proste ucięcie białych znaków z lewej:
+            while (!trimmed.empty() && std::isspace(static_cast<unsigned char>(trimmed.front()))) {
+                trimmed.erase(trimmed.begin());
+            }
+            if (trimmed.rfind("//", 0) == 0) {
+                continue;
+            }
+        }
+
+        std::istringstream lineStream(line);
         std::string cmdName;
-        while (ss >> cmdName) {
+        if (!(lineStream >> cmdName)) {
+            continue; // linia bez komendy
+        }
 
-            // 1. Sprawdzamy czy komenda istnieje
-            auto it = pluginCommands.find(cmdName);
-            if (it == pluginCommands.end()) {
-                std::cerr << "!!! Nieznane polecenie: " << cmdName << "\n";
-                std::string dummy;
-                std::getline(ss, dummy);   // pomijamy resztę linii
-                continue;
-            }
-
-            // 2. Dla komend innych niż Pause czytamy nazwę obiektu
-            std::string objName;
-            const char *pObjName = nullptr;
-
-            if (cmdName != "Pause") {
-                if (!(ss >> objName)) {
-                    std::cerr << "!!! Brak nazwy obiektu dla komendy: "
-                              << cmdName << "\n";
-                    std::string dummy;
-                    std::getline(ss, dummy);   // pomijamy resztę linii
-                    continue;
+        if (cmdName == "Begin_Parallel_Actions") {
+            // ==== Zbieramy linie aż do End_Parallel_Actions ====
+            std::vector<std::string> parallelLines;
+            while (std::getline(scriptStream, line)) {
+                std::istringstream inner(line);
+                std::string first;
+                if (!(inner >> first)) {
+                    continue; // pusta linia
                 }
-                pObjName = objName.c_str();
+                if (first == "End_Parallel_Actions") {
+                    break;
+                }
+                parallelLines.push_back(line);
             }
 
-            // 3. Tworzymy obiekt komendy
-            AbstractInterp4Command* cmd = it->second();
-            if (!cmd) {
-                std::cerr << "!!! CreateCmd() zwrocilo nullptr dla: "
-                          << cmdName << "\n";
-                std::string dummy;
-                std::getline(ss, dummy);
-                continue;
+            // ==== Uruchamiamy każdą linię w osobnym wątku ====
+            std::vector<std::thread> threads;
+            for (const std::string &pl : parallelLines) {
+                threads.emplace_back(
+                    [&pluginCommands, &scene, &channel, pl]() {
+                        std::istringstream ls(pl);
+                        std::string innerCmd;
+                        if (!(ls >> innerCmd)) {
+                            return;
+                        }
+                        ExecSingleCommandLine(innerCmd, ls, pluginCommands, scene, channel);
+                    }
+                );
             }
 
-            // 4. Wczytanie parametrów (JUŻ BEZ nazwy obiektu!)
-            if (!cmd->ReadParams(ss)) {
-                std::cerr << "!!! Blad parametrow polecenia: "
-                          << cmdName << "\n";
-                delete cmd;
-                std::string dummy;
-                std::getline(ss, dummy);
-                continue;
+            // ==== Czekamy, aż wszystkie wątki skończą ====
+            for (std::thread &t : threads) {
+                if (t.joinable()) {
+                    t.join();
+                }
             }
-
-            std::cout << " Wykonuje: ";
-            cmd->PrintCmd();
-
-            // 5. Wykonanie komendy na scenie + wysłanie do serwera
-            if (!cmd->ExecCmd(scene, pObjName, channel)) {
-                std::cerr << "!!! ExecCmd nie powiodlo sie dla komendy: "
-                          << cmdName << "\n";
-            }
-
-            delete cmd;
+        }
+        else {
+            // Pojedyncza komenda – normalne wykonanie
+            ExecSingleCommandLine(cmdName, lineStream, pluginCommands, scene, channel);
         }
     }
+
 
 
     // ================================================================
