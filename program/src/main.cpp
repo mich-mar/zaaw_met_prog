@@ -191,7 +191,7 @@ int main(int argc, char** argv)
     }
 
     // ================================================================
-    // 4. Przetwarzanie skryptu (po preprocesorze) + akcje równoległe
+    // 4. Przetwarzanie skryptu + akcje równoległe
     // ================================================================
     std::cout << "\n--- PRZETWARZANIE SKRYPTU ---\n";
 
